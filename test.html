@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>📊 Project Gantt Chart</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8fafc;
+        margin: 20px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      #chart_div {
+        width: 100%;
+        height: 80vh;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 15px;
+        overflow-x: auto;
+      }
+    </style>
+   <!-- <script>
+      google.charts.load('current', {'packages':['gantt']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      async function drawChart() {
+        try {
+          const response = await fetch('output.json');
+          let jsonData = await response.json();
+
+          // ✅ handle single object or array
+          if (!Array.isArray(jsonData)) {
+            jsonData = [jsonData];
+          }
+
+          if (!jsonData || jsonData.length === 0) {
+            document.getElementById('chart_div').innerHTML = '<p>No data available.</p>';
+            return;
+          }
+
+          const data = new google.visualization.DataTable();
+          data.addColumn('string', 'Task ID');
+          data.addColumn('string', 'Task Name');
+          // 🚨 IMPORTANT: Add the 'Resource' column here
+          data.addColumn('string', 'Resource'); 
+          data.addColumn('date', 'Start Date');
+          data.addColumn('date', 'End Date');
+          data.addColumn('number', 'Duration');
+          data.addColumn('number', 'Percent Complete');
+          data.addColumn('string', 'Dependencies');
+
+          jsonData.forEach(t => {
+            if (!t.start || !t.end) {
+              console.warn("Skipping invalid task:", t);
+              return;
+            }
+
+            let start = new Date(t.start);
+            let end = new Date(t.end);
+
+            // ✅ if start and end are same, make the task at least 1 hour long
+            if (start.getTime() === end.getTime()) {
+              end = new Date(start.getTime() + 60 * 60 * 1000);
+            }
+
+           data.addRow([
+              t.id?.toString() || '',
+              t.name || '',
+              t.resource || t.id?.toString() || '',
+              start,
+              end,
+              null,
+              Number(t.percent) || 0,
+              // ✅ FIX 2: Use the dependencies field from your JSON
+              t.dependencies || null 
+            ]);
+          });
+
+          const options = {
+            height: jsonData.length * 50 + 100,
+            gantt: {
+              // ✅ FIX 1: Set to TRUE to calculate and display the critical path
+              criticalPathEnabled: true, 
+
+              // 💡 Optional: You can customize the look of the critical path here:
+              criticalPathStyle: {
+                 stroke: '#DB4437', // A strong red color
+                 strokeWidth: 4 
+              },
+
+              arrow: {
+                angle: 100,
+                width: 5,
+                color: 'green',
+                radius: 0
+              },
+              trackHeight: 30,
+              barCornerRadius: 5,
+              labelMaxWidth: 600,
+                 // 🚨 IMPORTANT: Define your color palette here
+                 palette: [
+                    { 
+                        "color": "#1E88E5",  // Blue (Label Text Color)
+                        "dark": "#0D47A1",   // Dark Blue (Completed % Color)
+                        "light": "#BBDEFB"   // Light Blue (Remaining Bar Color)
+                    },
+                    { 
+                        "color": "#FFB300",  // Orange
+                        "dark": "#E65100",   // Dark Orange
+                        "light": "#FFE0B2"   // Light Orange
+                    },
+                    { 
+                        "color": "#43A047",  // Green
+                        "dark": "#1B5E20",   // Dark Green
+                        "light": "#C8E6C9"   // Light Green
+                    },
+                    { 
+                        "color": "#E53935",  // Red
+                        "dark": "#B71C1C",   // Dark Red
+                     "light": "#FFCDD2"   // Light Red
+                    }
+                 ]
+            },
+          };
+
+          const chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        } catch (err) {
+          console.error(err);
+          document.getElementById('chart_div').innerHTML = '<p>Error loading data.</p>';
+        }
+      }
+    </script>-->
+<script>
+      google.charts.load('current', {'packages':['gantt']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      async function drawChart() {
+        try {
+          const response = await fetch('sample.json');
+          let jsonData = await response.json();
+
+          // ✅ handle single object or array
+          if (!Array.isArray(jsonData)) {
+            jsonData = [jsonData];
+          }
+
+          if (!jsonData || jsonData.length === 0) {
+            document.getElementById('chart_div').innerHTML = '<p>No data available.</p>';
+            return;
+          }
+
+          const data = new google.visualization.DataTable();
+          data.addColumn('string', 'Task ID');
+          data.addColumn('string', 'Task Name');
+          data.addColumn('string', 'Resource'); 
+          data.addColumn('date', 'Start Date');
+          data.addColumn('date', 'End Date');
+          data.addColumn('number', 'Duration');
+          data.addColumn('number', 'Percent Complete');
+          data.addColumn('string', 'Dependencies');
+
+          jsonData.forEach(t => {
+            if (!t.start || !t.end) {
+              console.warn("Skipping invalid task:", t);
+              return;
+            }
+
+            let start = new Date(t.start);
+            let end = new Date(t.end);
+
+            // ✅ if start and end are same, make the task at least 1 hour long
+            if (start.getTime() === end.getTime()) {
+              end = new Date(start.getTime() + 60 * 60 * 1000);
+            }
+
+           data.addRow([
+              t.id?.toString() || '',
+              t.name || '',
+              t.resource || t.id?.toString() || '',
+              start,
+              end,
+              null,
+              Number(t.percent) || 0,
+              // Using t.dependencies to link tasks
+              t.dependencies || null 
+            ]);
+          });
+
+          const options = {
+            height: jsonData.length * 50 + 100,
+            gantt: {
+              // FIX: Critical path is ENABLED
+              criticalPathEnabled: true, 
+
+              // NEW: Custom style for critical path bars (optional)
+              criticalPathStyle: {
+                 stroke: '#DB4437', // Red color for critical path
+                 strokeWidth: 4 
+              },
+              trackHeight: 30,
+              barCornerRadius: 5,
+              // FIX: Increased width for full labels
+              labelMaxWidth: 600,
+              arrow: {
+                angle: 100,
+                width: 5,
+                color: 'green',
+                radius: 0
+              },
+                
+                 // Custom color palette
+                 palette: [
+                    { "color": "#1E88E5", "dark": "#0D47A1", "light": "#BBDEFB" },
+                    { "color": "#FFB300", "dark": "#E65100", "light": "#FFE0B2" },
+                    { "color": "#43A047", "dark": "#1B5E20", "light": "#C8E6C9" },
+                    { "color": "#E53935", "dark": "#B71C1C", "light": "#FFCDD2" }
+                 ]
+            },
+          };
+
+          const chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        } catch (err) {
+          console.error(err);
+          document.getElementById('chart_div').innerHTML = '<p>Error loading data.</p>';
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h2>📅 Project Timeline</h2>
+    <div id="chart_div"></div>
+  </body>
+</html>
