@@ -1,0 +1,58 @@
+[
+  {
+    "id": "0", 
+    "name": "tBits_Baseline_&_Initiation", 
+    "start": "2021-06-01T09:30", 
+    "end": "2021-06-03T17:00", 
+    "percent": 100.0,
+    "dependencies": null
+  },
+  {
+    "id": "1", 
+    "name": "APMSIDC-GoAP (Approval Phase)", 
+    "start": "2021-06-04T09:30", 
+    "end": "2021-06-14T17:00", 
+    "percent": 30.0,
+    "dependencies": "0"
+  },
+  {
+    "id": "2", 
+    "name": "tBits Collabwrite Deployment", 
+    "start": "2021-06-15T09:30", 
+    "end": "2021-06-28T17:00", 
+    "percent": 0.0,
+    "dependencies": "1"
+  },
+  {
+    "id": "3", 
+    "name": "NTP + Moblisation period", 
+    "start": "2021-06-01T09:30", 
+    "end": "2021-06-04T17:00", 
+    "percent": 0.0,
+    "dependencies": null
+  },
+  {
+    "id": "4", 
+    "name": "Technical - Setup, Administration", 
+    "start": "2021-06-05T09:30", 
+    "end": "2021-06-10T17:00", 
+    "percent": 0.0,
+    "dependencies": "3"
+  },
+  {
+    "id": "5", 
+    "name": "Installation", 
+    "start": "2021-06-11T09:30", 
+    "end": "2021-06-14T17:00", 
+    "percent": 0.0,
+    "dependencies": "4"
+  },
+  {
+    "id": "6", 
+    "name": "Installation of tBits [ 2 instances]", 
+    "start": "2021-06-15T09:30", 
+    "end": "2021-06-16T17:00", 
+    "percent": 0.0,
+    "dependencies": "5"
+  }
+]
