@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>📊 Tbits Project Gantt Chart</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8fafc;
+        margin: 20px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      #chart_div {
+        width: 100%;
+        min-height: 50vh; /* Changed height to min-height for responsiveness */
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 15px;
+        overflow-x: auto;
+      }
+    </style>
+
+    <script>
+      google.charts.load('current', {'packages':['gantt']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      async function drawChart() {
+        try {
+          // Attempt to fetch the JSON data from 'new.json'
+          const response = await fetch('new.json');
+          
+          // Throw an error if the response is not successful (e.g., 404)
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          let jsonData = await response.json();
+
+          // ✅ Handle single object or array
+          if (!Array.isArray(jsonData)) {
+            jsonData = [jsonData];
+          }
+
+          if (!jsonData || jsonData.length === 0) {
+            document.getElementById('chart_div').innerHTML = '<p style="text-align: center;">No project data found in new.json.</p>';
+            return;
+          }
+
+          const data = new google.visualization.DataTable();
+          data.addColumn('string', 'Task ID');
+          data.addColumn('string', 'Task Name');
+          data.addColumn('string', 'Resource'); 
+          data.addColumn('date', 'Start Date');
+          data.addColumn('date', 'End Date');
+          data.addColumn('number', 'Duration');
+          data.addColumn('number', 'Percent Complete');
+          data.addColumn('string', 'Dependencies');
+    
+          jsonData.forEach(t => {
+            // Ensure task has mandatory ID, name, start, and end
+            if (!t.id || !t.name || !t.start || !t.end) {
+              console.warn("Skipping invalid task (missing ID, name, start, or end):", t);
+              return;
+            }
+
+            let start = new Date(t.start);
+            let end = new Date(t.end);
+
+            // ✅ Basic validation to ensure valid dates
+            if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+                console.warn("Skipping task with invalid date format:", t);
+                return;
+            }
+
+            // ✅ If start and end are same, make the task at least 1 hour long for visibility
+            if (start.getTime() === end.getTime()) {
+              end = new Date(start.getTime() + 60 * 60 * 1000);
+            }
+
+            // ✅ Correctly parse and clean up dependencies
+            let dependencies = null;
+            if (t.dependencies && typeof t.dependencies === 'string' && t.dependencies.trim() !== '') {
+              const cleaned = t.dependencies
+                .split(',')
+                .map(d => d.trim())
+                .filter(d => d && d !== t.id.toString()); // remove self-dependency
+              
+              dependencies = cleaned.length > 0 ? cleaned.join(',') : null;
+            }
+            
+           
+            // it's best to rely on Google Charts' internal dependency handling.
+
+            data.addRow([
+              t.id.toString(), // Task ID (must be string)
+              t.name || 'Untitled Task', // Task Name
+              t.resource || t.id.toString(), // Resource
+              start,
+              end,
+              null, // Duration (let start/end calculate)
+              Number(t.percent) || 0, // Percent Complete
+              dependencies // Correctly use the cleaned dependencies
+            
+            ]);
+          });
+
+
+          // Check again after filtering if any data is left
+          if (data.getNumberOfRows() === 0) {
+            document.getElementById('chart_div').innerHTML = '<p style="text-align: center;">No valid tasks to display after filtering.</p>';
+            return;
+          }
+
+          const options = {
+            // Dynamically set height based on the number of tasks
+            height: data.getNumberOfRows() * 50 + 100, 
+            gantt: {
+              // Critical path is ENABLED
+              criticalPathEnabled: true, 
+              // Custom style for critical path bars
+              criticalPathStyle: {
+                  stroke: '#DB4437', // Red color for critical path
+                  strokeWidth: 2 
+              },
+              trackHeight: 30,
+             barHeight: 20,
+              barCornerRadius: 5,
+              // Increased width for full labels
+              labelMaxWidth: 500, 
+              // arrow: {
+              //   angle: 100,
+              //   width: 3,
+              //   color: 'green',
+              //   radius: 0
+              // },
+              // Custom color palette
+              palette: [
+                { "color": "#1E88E5", "dark": "#0D47A1", "light": "#BBDEFB" },
+                { "color": "#FFB300", "dark": "#E65100", "light": "#FFE0B2" },
+                { "color": "#43A047", "dark": "#1B5E20", "light": "#C8E6C9" },
+                { "color": "#E53935", "dark": "#B71C1C", "light": "#FFCDD2" }
+              ]
+            },
+          };
+
+          const chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+          chart.draw(data, options);
+          
+        } catch (err) {
+          console.error("Error drawing Gantt Chart:", err);
+          document.getElementById('chart_div').innerHTML = `<p style="text-align: center;">Error loading data: ${err.message}. Check the 'new.json' file and console for details.</p>`;
+        }
+       
+      }
+    </script>
+  </head>
+  <body>
+    <h2>📅 Tbits Project Gantt Chart</h2>
+    <div id="chart_div"></div>
+  </body>
+</html>
+
