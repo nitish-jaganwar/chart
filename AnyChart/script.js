@@ -1,5 +1,35 @@
 let chartInstance = null;
 let treeData = null;
+let pertChartInstance = null; // Global PERT chart instance 
+
+// --- Helper function to find the currently active chart instance ---
+function getActiveChart() {
+  const ganttContainer = document.getElementById('container');
+  const pertContainer = document.getElementById('pertContainer');
+
+  if (ganttContainer && ganttContainer.classList.contains('active')) {
+    return chartInstance;
+  } else if (pertContainer && pertContainer.classList.contains('active')) {
+    return pertChartInstance;
+  }
+  return null;
+}
+// --- Helper function to create unified toolbar handlers ---
+function createChartHandler(methodName) {
+  return () => {
+    const activeChart = getActiveChart();
+    if (activeChart && activeChart[methodName]) {
+      // Call the corresponding method on the active chart instance
+      activeChart[methodName]();
+    } else {
+      console.warn(`Action "${methodName}" not supported or no active chart found.`);
+      // Optionally, provide user feedback here
+      // alert(`Export type "${methodName.replace('saveAs', '')}" is not supported for the active chart.`);
+    }
+  };
+}
+
+
 async function loadData() {
   const response = await fetch('anyChart.json');
   const data = await response.json();
@@ -20,7 +50,7 @@ async function loadData() {
   chart.headerHeight(105);
   // set the height of timeline elements
   chart.getTimeline().elements().height(20);
- 
+
 
   // 3. ⚙️ DATA GRID CUSTOMIZATION (Columns, Buttons, Layout)
   var dataGrid = chart.dataGrid();
@@ -122,7 +152,7 @@ async function loadData() {
   colProgress.width(80);
   colProgress.labels().format("{%progress}");
 
-  
+
   // Button click handler
   document.addEventListener("click", function (e) {
     const btn = e.target.closest(".proj-action-btn");
@@ -271,23 +301,51 @@ async function loadData() {
   // --- Export Handlers ---
   document.getElementById("savePNG").onclick = () => chart.saveAsPng();
   document.getElementById("saveJPG").onclick = () => chart.saveAsJpg();
-  document.getElementById("saveSVG").onclick = () => chart.saveAsSvg();
-  document.getElementById("savePDF").onclick = () => chart.saveAsPdf();
+  // document.getElementById("saveSVG").onclick = () => chart.saveAsSvg();
+  // document.getElementById("savePDF").onclick = () => chart.saveAsPdf();
 
-  // document.getElementById("saveCSV").onclick = () => chart.data().toCsvFile("chart_data.csv");
-  // document.getElementById("saveXLSX").onclick = () => chart.data().toXlsxFile("chart_data.xlsx");
+  // // document.getElementById("saveCSV").onclick = () => chart.data().toCsvFile("chart_data.csv");
+  // // document.getElementById("saveXLSX").onclick = () => chart.data().toXlsxFile("chart_data.xlsx");
+  // // --- Data export handlers ---
+  // document.getElementById("saveCSV").onclick = () => chart.saveAsCsv();
+  // document.getElementById("saveXLSX").onclick = () => chart.saveAsXlsx();
+
+  // document.getElementById("printBtn").onclick = () => chart.print();
+
+  // document.getElementById("fullscreenBtn").onclick = () => {
+  //   const container = document.getElementById("container");
+  //   if (!document.fullscreenElement) {
+  //     container.requestFullscreen().catch(err => console.error("Fullscreen failed:", err));
+  //   } else {
+  //     document.exitFullscreen();
+  //   }
+  // };
+  // --- UNIFIED Export Handlers ---
+  // document.getElementById("savePNG").onclick = createChartHandler("saveAsPng");
+  // document.getElementById("saveJPG").onclick = createChartHandler("saveAsJpg");
+  document.getElementById("saveSVG").onclick = createChartHandler("saveAsSvg");
+  document.getElementById("savePDF").onclick = createChartHandler("saveAsPdf");
+
   // --- Data export handlers ---
-  document.getElementById("saveCSV").onclick = () => chart.saveAsCsv();
-  document.getElementById("saveXLSX").onclick = () => chart.saveAsXlsx();
+  document.getElementById("saveCSV").onclick = createChartHandler("saveAsCsv");
+  document.getElementById("saveXLSX").onclick = createChartHandler("saveAsXlsx");
 
-  document.getElementById("printBtn").onclick = () => chart.print();
+  document.getElementById("printBtn").onclick = createChartHandler("print");
 
+  // --- Fullscreen Handler (Updated to check active container) ---
   document.getElementById("fullscreenBtn").onclick = () => {
-    const container = document.getElementById("container");
-    if (!document.fullscreenElement) {
-      container.requestFullscreen().catch(err => console.error("Fullscreen failed:", err));
-    } else {
-      document.exitFullscreen();
+    const ganttContainer = document.getElementById('container');
+    const pertContainer = document.getElementById('pertContainer');
+    // Get the currently visible container
+    const activeContainer = ganttContainer.classList.contains('active') ? ganttContainer :
+      pertContainer.classList.contains('active') ? pertContainer : null;
+
+    if (activeContainer) {
+      if (!document.fullscreenElement) {
+        activeContainer.requestFullscreen().catch(err => console.error("Fullscreen failed:", err));
+      } else {
+        document.exitFullscreen();
+      }
     }
   };
 
@@ -330,19 +388,20 @@ async function initPert() {
   anychart.onDocumentReady(function () {
     const chart = anychart.pert();
     chart.data(pertData, "as-table", dependencies);
-    chart.title("PERT Chart");
+    //chart.title("PERT Chart");
 
     // chart.criticalPath().stroke("2 red");
     chart.milestones().labels().fontSize(10);
     duration = chart.getStat("pertChartProjectDuration");
-    chart.verticalSpacing(50);
-    chart.horizontalSpacing("95");
+    chart.verticalSpacing(70);
+    chart.horizontalSpacing("89");
     chart.milestones().size(25);
 
     chart.criticalPath({ milestones: { fill: "#FF4040", selectFill: "#92000A" } });
 
     chart.contextMenu(true);
-
+    // Assign to global variable here 
+    pertChartInstance = chart;
     chart.container("pertContainer");
     chart.draw();
   });
