@@ -1,0 +1,375 @@
+ /* #container {
+      width: 100%;
+      
+      background: #0000;
+      overflow-x: auto;
+    } */
+ /* html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} */
+ /* body {
+    background-color: #f7f7f7;
+    color: #333;
+   
+    font-size: 14px;
+    line-height: 1.4;
+} */
+ /* .proj-action-btn {
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s ease;
+  } */
+ /* .action-btn:hover {
+    background: #1565c0;
+  }
+  .task-name {
+    font-weight: 500;
+  } */
+ /* html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} */
+ /* body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #7f53ac, #647dee);
+    
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+     
+    } */
+ /* #container {
+      width: 100%;
+      height: 80vh;
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    } */
+ #controls {
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   gap: 10px;
+   margin-bottom: 20px;
+ }
+
+ /* button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+    } */
+ h1 {
+   margin: 16px 0;
+
+   text-justify: auto;
+   text-align: center;
+   font-size: 1.8rem;
+   letter-spacing: 0.5px;
+ }
+
+ /* .proj-action-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #0874e0;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background 0.2s;
+    }
+
+    .proj-action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #proj-context-menu {
+      position: absolute;
+      z-index: 9999;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 6px 0;
+      display: none;
+      min-width: 160px;
+      color: #e2e8f0;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    #proj-context-menu button {
+      display: block;
+      width: 100%;
+      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      text-align: left;
+      color: inherit;
+      cursor: pointer;
+    } */
+
+ /* #proj-context-menu button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    } */
+ /* Group of inline action buttons */
+ /* ---- Base Font & Page ---- */
+ /* html, body {
+  font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1e293b;
+  background-color: #f9fafb;
+  margin: 0;
+  padding: 0;
+} */
+ html,
+ body,
+ #container {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   height: 100%;
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   background-color: #f9fafb;
+   color: #1e293b;
+
+ }
+
+ /* ---- Inline Action Buttons ---- */
+ .proj-action-group {
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   gap: 2px;
+ }
+
+ .proj-action-btn {
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   background: transparent;
+   border: none;
+   cursor: pointer;
+   padding: 4px;
+   border-radius: 6px;
+   transition: background 0.2s ease, color 0.2s ease;
+   font-size: 18px;
+   color: #475569;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ /* Icon sizes and colors */
+ .proj-action-btn .material-icons {
+   font-size: 20px;
+   vertical-align: middle;
+ }
+
+ .proj-action-btn:hover {
+   background: #e2e8f0;
+   color: #0d47a1;
+ }
+
+ /* Container of buttons */
+
+ /* (Optional) Table/Chart tweaks */
+ .task-name {
+   font-weight: 400;
+   color: #334155;
+ }
+
+ /* Colored icons per type */
+ #childbtn {
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   color: #16a34a;
+   /* green */
+ }
+
+ #updatebtn {
+   color: #2563eb;
+   /* blue */
+ }
+
+ #viewbtn {
+   color: #7c3aed;
+   /* purple */
+ }
+
+ #saveCSV {
+   color: #2c59a7;
+   /* purple */
+ }
+
+ /* Remove default hover highlight of DataGrid cells for this column */
+ colAction {
+   pointer-events: none;
+ }
+
+ /* html,
+ body {
+   font-family: 'Inter', Helvetica, Arial, sans-serif;
+   font-size: 14px;
+   line-height: 1.4;
+   color: #1e293b;
+   /* default text color */
+ */ #pertContainer {
+   width: 100%;
+   height: 100vh;
+ }
+
+ /* menu button */
+ .menu-btn {
+   border: none;
+   background: #fff;
+   border-radius: 50%;
+   width: 36px;
+   height: 36px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+   transition: all 0.2s ease;
+ }
+
+ .menu-btn:hover {
+   background: #f1f5f9;
+ }
+
+ .menu-btn .material-icons {
+   font-size: 22px;
+   color: #334155;
+ }
+
+
+ .menu-item {
+   display: block;
+   padding: 10px 15px;
+   text-decoration: none;
+   color: #333;
+   border-bottom: 1px solid #eee;
+ }
+
+ .menu-item:last-child {
+   border-bottom: none;
+ }
+
+ .menu-item:hover {
+   background-color: #f0f0f0;
+ }
+
+ /* Force all AnyChart elements to use Inter */
+ .anychart,
+ .anychart-title,
+ .anychart-labels,
+ .anychart-ui,
+ .anychart-gantt,
+ .anychart-gantt-datagrid,
+ .anychart-gantt-timeline,
+ .anychart-tooltip,
+ .anychart-context-menu,
+ .anychart-credits,
+ .anychart-chart,
+ .anychart-legend {
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+ }
+
+ .toolbar {
+   /* display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 15px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      flex-wrap: wrap; */
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   gap: 12px;
+   background: #f9fafb;
+   /* subtle light gray */
+   border: 1px solid #e5e7eb;
+   /* light border */
+   border-radius: 12px;
+   padding: 8px 16px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+   font-family: 'Inter', Helvetica, Arial, sans-serif;
+ }
+
+ .toolbar button,
+ .toolbar select {
+   /* background: #f4f4f4;
+   border: none;
+   border-radius: 6px;
+   padding: 6px 10px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+   transition: background 0.2s; */
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   background: #ffffff;
+   color: #374151;
+   /* neutral dark gray */
+   border: 1px solid #d1d5db;
+   border-radius: 8px;
+   padding: 6px 12px;
+   font-size: 14px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: all 0.2s ease-in-out;
+ }
+
+ .toolbar button:hover,
+ .toolbar select:hover {
+   /* background: #e0e0e0; */
+   background: #f3f4f6;
+   border-color: #9ca3af;
+ }
+
+ .toolbar button:active {
+  background: #e5e7eb;
+  transform: scale(0.98);
+}
+/* Material Icons alignment */
+.toolbar .material-icons {
+  font-size: 18px;
+  color: #6b7280;
+  vertical-align: middle;
+}
+/* Icon + button group styling */
+.toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Responsive behavior */
+@media (max-width: 700px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+ select {
+   appearance: none;
+   padding-right: 20px;
+ }

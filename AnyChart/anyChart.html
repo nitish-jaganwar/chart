@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>AnyChart Gantt Example</title>
+
+  <script src="https://cdn.anychart.com/releases/8.13.0/js/anychart-bundle.min.js"></script>
+
+  <link rel="stylesheet" href="anyChart.css">
+  <script src="script.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.anychart.com/releases/8.13.0/js/anychart-ui.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.13.0/css/anychart-ui.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.anychart.com/releases/8.13.0/fonts/css/anychart-font.min.css" />
+  <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
+
+  <style>
+    /* Toggle Switch Style */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.slider {
+      background-color: #4CAF50;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .toggle-div {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ✅ Custom Toolbar -->
+  <div class="toolbar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <!-- <span class="material-icons">save</span> Save Chart As: -->
+      <!-- <button id="savePNG">PNG</button>
+      <button id="saveJPG">JPG</button>
+      <button id="saveSVG">SVG</button>
+      <button id="savePDF">PDF</button> -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="material-icons">image</span><button id="savePNG">PNG</button>
+        <span class="material-icons">photo</span><button id="saveJPG">JPG</button>
+        <span class="material-icons">gesture</span><button id="saveSVG">SVG</button>
+        <span class="material-icons">picture_as_pdf</span><button id="savePDF">PDF</button>
+        <span class="material-icons">table_chart</span><button id="saveCSV">CSV</button>
+        <span class="material-icons">grid_on</span><button id="saveXLSX">XLSX</button>
+        <button id="printBtn"><span class="material-icons">print</span> Print</button>
+        <button id="fullscreenBtn"><span class="material-icons">fullscreen</span> Full Screen</button>
+        <label class="switch">
+          <input type="checkbox" id="toggleSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="container" class="toggle-div active" style=" height: 900px;"></div>
+  <div id="pertContainer" class="toggle-div" style=" height: 900px;"></div>
+
+
+
+  <script>
+    const toggleBtn = document.getElementById('toggleSwitch');
+    const div1 = document.getElementById('container');
+    const div2 = document.getElementById('pertContainer');
+
+    toggleBtn.addEventListener('click', () => {
+      div1.classList.toggle('active');
+      div2.classList.toggle('active');
+    });
+  </script>
+
+</body>
+
+</html>
