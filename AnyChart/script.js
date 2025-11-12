@@ -404,6 +404,9 @@ async function initPert() {
     pertChartInstance = chart;
     chart.container("pertContainer");
     chart.draw();
+    // Disable built-in context menu
+    const menu = chart.contextMenu();
+    menu.itemsFormatter(() => ({}));
   });
 }
 
