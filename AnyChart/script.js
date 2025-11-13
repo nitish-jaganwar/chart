@@ -78,7 +78,7 @@ async function loadData() {
   }
 
   // --- Column 2: Action Buttons ---
-  let colAction = chart.dataGrid().column(0);
+  let colAction = chart.dataGrid().column(5);
   styleColumnTitle(colAction, "Actions");
   colAction.width(110);
 
@@ -405,8 +405,8 @@ async function initPert() {
     chart.container("pertContainer");
     chart.draw();
     // Disable built-in context menu
-    const menu = chart.contextMenu();
-    menu.itemsFormatter(() => ({}));
+  const menu = chart.contextMenu();
+  menu.itemsFormatter(() => ({}));
   });
 }
 

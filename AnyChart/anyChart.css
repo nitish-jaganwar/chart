@@ -208,7 +208,38 @@
    color: #2c59a7;
    /* purple */
  }
-
+#savePNG {
+   color: #2c59a7;
+   /* purple */
+ }
+ #saveJPG {
+   color: #2c59a7;
+   /* purple */
+ }
+ #saveSVG {
+   color: #2c59a7;
+   /* purple */
+ }
+ #savsavePDFeCSV {
+   color: #2c59a7;
+   /* purple */
+ }
+ #printBtn {
+   color: #2c59a7;
+   /* purple */
+ }
+ #savePDF {
+   color: #2c59a7;
+   /* purple */
+ }
+ #saveXLSX {
+   color: #2c59a7;
+   /* purple */
+ }
+  #saveXLSX {
+   color: #2c59a7;
+   /* purple */
+ }
  /* Remove default hover highlight of DataGrid cells for this column */
  colAction {
    pointer-events: none;
