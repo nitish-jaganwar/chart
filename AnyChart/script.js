@@ -29,8 +29,9 @@ function createChartHandler(methodName) {
   };
 }
 
-
-async function loadData() {
+createGanttChart();
+createPertChart();
+async function createGanttChart() {
   const response = await fetch('anyChart.json');
   const data = await response.json();
   // Create a tree data structure
@@ -38,13 +39,14 @@ async function loadData() {
 
   // Create Gantt chart
   var chart = anychart.ganttProject();
+//Assign to global variable here 
+  chartInstance = chart;
   chart.data(treeData);
 
   chart.title().fontFamily("Inter, Helvetica, Arial");
   chart.tooltip().fontFamily("Inter, Helvetica, Arial");
 
-  //Assign to global variable here 
-  chartInstance = chart;
+  
 
   chart.defaultRowHeight(35);
   chart.headerHeight(105);
@@ -299,30 +301,13 @@ async function loadData() {
   menu.itemsFormatter(() => ({}));
 
   // --- Export Handlers ---
-  document.getElementById("savePNG").onclick = () => chart.saveAsPng();
-  document.getElementById("saveJPG").onclick = () => chart.saveAsJpg();
+  // document.getElementById("savePNG").onclick = () => chart.saveAsPng();
+  // document.getElementById("saveJPG").onclick = () => chart.saveAsJpg();
   // document.getElementById("saveSVG").onclick = () => chart.saveAsSvg();
   // document.getElementById("savePDF").onclick = () => chart.saveAsPdf();
 
-  // // document.getElementById("saveCSV").onclick = () => chart.data().toCsvFile("chart_data.csv");
-  // // document.getElementById("saveXLSX").onclick = () => chart.data().toXlsxFile("chart_data.xlsx");
-  // // --- Data export handlers ---
-  // document.getElementById("saveCSV").onclick = () => chart.saveAsCsv();
-  // document.getElementById("saveXLSX").onclick = () => chart.saveAsXlsx();
-
-  // document.getElementById("printBtn").onclick = () => chart.print();
-
-  // document.getElementById("fullscreenBtn").onclick = () => {
-  //   const container = document.getElementById("container");
-  //   if (!document.fullscreenElement) {
-  //     container.requestFullscreen().catch(err => console.error("Fullscreen failed:", err));
-  //   } else {
-  //     document.exitFullscreen();
-  //   }
-  // };
-  // --- UNIFIED Export Handlers ---
-  // document.getElementById("savePNG").onclick = createChartHandler("saveAsPng");
-  // document.getElementById("saveJPG").onclick = createChartHandler("saveAsJpg");
+  document.getElementById("savePNG").onclick =createChartHandler("saveAsPng");
+  document.getElementById("saveJPG").onclick = createChartHandler("saveAsJpg");
   document.getElementById("saveSVG").onclick = createChartHandler("saveAsSvg");
   document.getElementById("savePDF").onclick = createChartHandler("saveAsPdf");
 
@@ -351,9 +336,9 @@ async function loadData() {
 
 
 }
-loadData();
 
-async function initPert() {
+
+async function createPertChart() {
   const response = await fetch("anyChart.json");
   const ganttData = await response.json();
   const tree = anychart.data.tree(ganttData, "as-tree");
@@ -410,7 +395,7 @@ async function initPert() {
   });
 }
 
-initPert();
+
 
 
 

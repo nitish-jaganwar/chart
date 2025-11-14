@@ -46,39 +46,52 @@
       background-color: #ccc;
       transition: 0.4s;
       border-radius: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(72, 72, 129);
+      font-weight: 600;
+      font-size: 13px;
+      font-family: 'Inter', Helvetica, Arial, sans-serif !important;
     }
 
     .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: 0.4s;
-      border-radius: 50%;
+      
+      background-color: rgb(213, 42, 42);
+      
+      
+     
     }
 
-    input:checked+.slider {
+    /* input:checked+.slider {
       background-color: #4CAF50;
-    }
+    } */
 
     input:checked+.slider:before {
       transform: translateX(26px);
     }
 
-    .toggle-div {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    /* input:checked+.slider {
+      background-color: #4CAF50;
+    } */
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
     }
 
-    .active {
-      display: block;
-    }
+
+
+
+    .toggle-div {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+.active {
+  visibility: visible;
+  height: 600px; /* or your chart height */
+}
+
   </style>
 
 </head>
@@ -87,46 +100,58 @@
 
   <!-- ✅ Custom Toolbar -->
   <div class="toolbar">
-    <div style="display:flex; align-items:center; gap:8px;">
-      <!-- <span class="material-icons">save</span> Save Chart As: -->
-      <!-- <button id="savePNG">PNG</button>
-      <button id="saveJPG">JPG</button>
-      <button id="saveSVG">SVG</button>
-      <button id="savePDF">PDF</button> -->
-      <div style="display:flex; align-items:center; gap:12px;">
-        <button id="savePNG"><span class="material-icons" style="color:#4CAF50;">image</span>PNG</button>
-        <button id="saveJPG"><span class="material-icons" style="color:#4CAF50;">photo</span>JPG</button>
-        <button id="saveSVG"><span class="material-icons"  style="color:#2196F3;">gesture</span>SVG</button>
-        <button id="savePDF"><span class="material-icons"style="color:#E53935;">picture_as_pdf</span>PDF</button>
-        <button id="saveCSV"><span class="material-icons"  style="color:#9C27B0;">table_chart</span>CSV</button>
-        <button id="saveXLSX"> <span class="material-icons"style="color:#2E7D32;">grid_on</span>XLSX</button>
-        <button id="printBtn"><span class="material-icons">print</span> Print</button>
-        <button id="fullscreenBtn"><span class="material-icons">fullscreen</span> Full Screen</button>
-        <label class="switch">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button id="savePNG"><span class="material-icons" style="color:#4CAF50;">image</span>PNG</button>
+      <button id="saveJPG"><span class="material-icons" style="color:#4CAF50;">photo</span>JPG</button>
+      <button id="saveSVG"><span class="material-icons" style="color:#2196F3;">gesture</span>SVG</button>
+      <button id="savePDF"><span class="material-icons" style="color:#E53935;">picture_as_pdf</span>PDF</button>
+      <button id="saveCSV"><span class="material-icons" style="color:#9C27B0;">table_chart</span>CSV</button>
+      <button id="saveXLSX"> <span class="material-icons" style="color:#2E7D32;">grid_on</span>XLSX</button>
+      <button id="printBtn"><span class="material-icons">print</span> Print</button>
+      <button id="fullscreenBtn"><span class="material-icons">fullscreen</span> Full Screen</button>
+      <!-- <label class="switch">
           <input type="checkbox" id="toggleSwitch">
           <span class="slider"></span>
-        </label>
-      </div>
-    </div>
+        </label> -->
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch">
+        <span class="slider" id="toggleText">Gantt</span>
+      </label>
 
+    </div>
   </div>
 
-  <div id="container" class="toggle-div active" style=" height: 900px;"></div>
+  <div id="container" class="toggle-div active" style=" height: 600px;"></div>
   <div id="pertContainer" class="toggle-div" style=" height: 900px;"></div>
 
-   <!-- Add this single container in your HTML where charts should render -->
-<div id="chartContainer" style="height:900px;"></div>
+
 
 
 
   <script>
+    // const toggleBtn = document.getElementById('toggleSwitch');
+    // const div1 = document.getElementById('container');
+    // const div2 = document.getElementById('pertContainer');
+
+    // toggleBtn.addEventListener('click', () => {
+    //   div1.classList.toggle('active');
+    //   div2.classList.toggle('active');
+    // });
     const toggleBtn = document.getElementById('toggleSwitch');
     const div1 = document.getElementById('container');
     const div2 = document.getElementById('pertContainer');
+    const toggleText = document.getElementById('toggleText');
 
-    toggleBtn.addEventListener('click', () => {
+    toggleBtn.addEventListener('change', () => {
       div1.classList.toggle('active');
       div2.classList.toggle('active');
+
+      // Update text inside toggle
+      if (toggleBtn.checked) {
+        toggleText.textContent = 'PERT';
+      } else {
+        toggleText.textContent = 'Gantt';
+      }
     });
   </script>
 

@@ -75,7 +75,7 @@
                         "progressValue": "80.0%",
                         "milestone": false,
                         "connectTo": "6",
-                        "connectorType": "",
+                        "connectorType": "finish-finish",
                         "children": [],
                         "parentId": 5
                       },
