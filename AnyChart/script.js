@@ -1,7 +1,8 @@
 let chartInstance = null;
 let treeData = null;
 let pertChartInstance = null; // Global PERT chart instance 
-
+let selectedRowId = null;
+let flatData = [];           // optional: keep your original array
 // --- Helper function to find the currently active chart instance ---
 function getActiveChart() {
   const ganttContainer = document.getElementById('container');
@@ -35,23 +36,77 @@ async function createGanttChart() {
   const response = await fetch('anyChart.json');
   const data = await response.json();
   // Create a tree data structure
+  flatData = data; 
   treeData = anychart.data.tree(data, "as-tree");
 
   // Create Gantt chart
   var chart = anychart.ganttProject();
-//Assign to global variable here 
+  //Assign to global variable here 
   chartInstance = chart;
   chart.data(treeData);
 
   chart.title().fontFamily("Inter, Helvetica, Arial");
   chart.tooltip().fontFamily("Inter, Helvetica, Arial");
 
-  
+
 
   chart.defaultRowHeight(35);
   chart.headerHeight(105);
   // set the height of timeline elements
   chart.getTimeline().elements().height(20);
+
+
+  // Assuming 'chart' is your AnyChart Gantt chart instance
+
+  // chart.listen('rowSelect', function(e) {
+  //     // The event object 'e' contains the selected item's data
+  //     var selectedItem = e.item;
+
+  //     // Now you can work with the data of the selected row
+  //     // The 'item' is an instance of anychart.data.Tree.DataItem
+
+  //     // Example: Get the 'id' and 'name' of the selected row
+  //     var itemId = selectedItem.get('id');
+  //     var itemName = selectedItem.get('name');
+
+  //     console.log('Row Selected:');
+  //     console.log('ID:', itemId);
+  //     console.log('Name:', itemName);
+
+  //     // You can also get the data item's index in the tree structure
+  //     var itemIndex = e.itemIndex;
+  //     console.log('Index:', itemIndex);
+
+  //     // You can access all data fields defined for the row
+  // })
+
+ chart.edit(true);
+
+
+  chart.listen('rowSelect', function (e) {
+    var selectedItem = e.item;
+    selectedRowId = selectedItem.get("id");   // <-- store globally
+
+    console.log("Row Selected:");
+    console.log("ID:", selectedRowId);
+    console.log("Name:", selectedItem.get("name"));
+  });
+
+  chart.listen("rowEdit", function (e) {
+    const id = e.item.get("id");
+    const field = e.field;     // name, actualStart, actualEnd, progressValue
+    const value = e.value;
+
+    console.log("Edited:", id, field, value);
+
+    // Update flat JSON array (optional but recommended)
+    const node = flatData.find(x => x.id == id);
+    if (node) {
+      node[field] = value;
+    }
+
+    console.log("Updated flat data:", flatData);
+  });
 
 
   // 3. ⚙️ DATA GRID CUSTOMIZATION (Columns, Buttons, Layout)
@@ -154,7 +209,31 @@ async function createGanttChart() {
   colProgress.width(80);
   colProgress.labels().format("{%progress}");
 
+  // --- Column 7: ---
+  let status = chart.dataGrid().column(6);
+  styleColumnTitle(status, "Status");
+  styleColumnLabels(status);
+  status.width(80);
+  status.labels().format("{%status}");
 
+  // --- Column 8:  ---
+  let assignee = chart.dataGrid().column(7);
+  styleColumnTitle(assignee, "assignee");
+  styleColumnLabels(assignee);
+  status.width(80);
+  // status.labels().format("{%assignee}");
+
+ 
+
+  chart.dataGrid().tooltip().useHtml(true);
+  chart.dataGrid().tooltip().format(
+    "<span style='font-weight:600;font-size:12pt'>" +
+    "{%actualStart}{dateTimeFormat:dd MMM yyyy} - " +
+    "{%actualEnd}{dateTimeFormat:dd MMM yyyy}</span><br><br>" +
+    "Progress: {%progress}<br>" +
+    "Task Id: {%id}<br>" +
+    "assignee :{%assignee}"
+  );
   // Button click handler
   document.addEventListener("click", function (e) {
     const btn = e.target.closest(".proj-action-btn");
@@ -306,7 +385,7 @@ async function createGanttChart() {
   // document.getElementById("saveSVG").onclick = () => chart.saveAsSvg();
   // document.getElementById("savePDF").onclick = () => chart.saveAsPdf();
 
-  document.getElementById("savePNG").onclick =createChartHandler("saveAsPng");
+  document.getElementById("savePNG").onclick = createChartHandler("saveAsPng");
   document.getElementById("saveJPG").onclick = createChartHandler("saveAsJpg");
   document.getElementById("saveSVG").onclick = createChartHandler("saveAsSvg");
   document.getElementById("savePDF").onclick = createChartHandler("saveAsPdf");
@@ -390,9 +469,115 @@ async function createPertChart() {
     chart.container("pertContainer");
     chart.draw();
     // Disable built-in context menu
-  const menu = chart.contextMenu();
-  menu.itemsFormatter(() => ({}));
+    const menu = chart.contextMenu();
+    menu.itemsFormatter(() => ({}));
   });
+}
+
+// add child
+// function addItem() {
+//   // Get input values
+//   var idValue = document.getElementById("idInput").value;
+//   var nameValue = document.getElementById("nameInput").value;
+//   var actualStartValue = document.getElementById("actualStartInput").value;
+//   var actualEndValue = document.getElementById("actualEndInput").value;
+//   var progressValue = document.getElementById("progressValueInput").value;
+//   var parentValue = document.getElementById("parentInput").value;
+//   var connectToValue = document.getElementById("connectToInput").value;
+//   var connectorTypeValue = document.getElementById("connectorTypeInput").value;
+
+//   // Create new task object
+//   var newData = {
+//     id: idValue,
+//     name: nameValue,
+//     actualStart: actualStartValue,
+//     actualEnd: actualEndValue,
+//     progressValue: progressValue,
+//     parent: parentValue,
+//     connectTo: connectToValue,
+//     connectorType: connectorTypeValue
+//   };
+
+//   // Add new item to tree (assuming treeData structure)
+//   // Example: adds to the first root node
+//   //treeData.getChildAt(0).addChild(newData);
+//   // search parent
+//   // Step 1: read selected row ID
+
+//   // decide parent
+//   let finalParent = parentValue || selectedRowId;  // <--- choose selected row
+
+//   // find parent node
+//   let parentNode = finalParent ? treeData.search("id", finalParent) : null;
+//   //let parentNode = parentValue ? treeData.search("id", parentValue) : null;
+//   console.log("Using parent:", finalParent, parentNode);
+//   console.log(parentNode)
+//   if (parentNode) {
+//     parentNode.addChild(newData);
+
+//   } else {
+//     treeData.addChild(newData);
+//   }
+
+//   chart.data(treeData); // refresh chart
+
+
+
+//   // Optional: clear input fields after adding
+//   document.getElementById("idInput").value = "";
+//   document.getElementById("nameInput").value = "";
+//   document.getElementById("actualStartInput").value = "";
+//   document.getElementById("actualEndInput").value = "";
+//   document.getElementById("progressValueInput").value = "";
+//   document.getElementById("parentInput").value = "";
+//   document.getElementById("connectToInput").value = "";
+//   document.getElementById("connectorTypeInput").value = "";
+
+//   console.log("New task added:", newData);
+// }
+function addChildTask() {
+  if (!chart || !treeData) return;
+
+  let parentId = selectedRowId;   // selected row
+
+  const parentNode = parentId ? treeData.search("id", parentId) : null;
+
+  // Generate unique ID
+  const newId = "task_" + Date.now();
+
+  // New empty child task
+  const newTask = {
+    id: newId,
+    name: "New Task",
+    actualStart: "2025-01-01",
+    actualEnd: "2025-01-02",
+    progressValue: "0%"
+  };
+
+  // Add to tree
+  if (parentNode) {
+    parentNode.addChild(newTask);
+  } else {
+    treeData.addChild(newTask);
+  }
+
+  chart.data(treeData);  // refresh
+
+  // // Add to flat data list (optional)
+  flatData.push(newTask);
+
+//   //Auto-select + scroll to new task
+//   setTimeout(() => {
+//     chart.getDataGrid().select(newId);
+//     chart.scrollTo(newId);
+// }, 200);
+ // ✅ Correct selection + scroll
+  setTimeout(() => {
+    chart.getTimeline().selectedElement(newId);
+    chart.getTimeline().scrollTo(newId);
+  }, 200);
+
+  console.log("Child Task Added Under:", parentId);
 }
 
 

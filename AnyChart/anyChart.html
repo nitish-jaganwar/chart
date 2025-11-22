@@ -82,7 +82,7 @@
 
 
 
-    .toggle-div {
+  .toggle-div {
   visibility: hidden;
   height: 0;
   overflow: hidden;
@@ -97,7 +97,47 @@
 </head>
 
 <body>
+<!-- <div class="form-box">
+    <label>ID
+        <input id="idInput" placeholder="101">
+    </label>
 
+    <label>Name
+        <input id="nameInput" placeholder="New Task">
+    </label>
+
+    <label>Actual Start
+        <input id="actualStartInput" placeholder="2025-01-01">
+    </label>
+
+    <label>Actual End
+        <input id="actualEndInput" placeholder="2025-01-03">
+    </label>
+
+    <label>Progress %
+        <input id="progressValueInput" placeholder="0">
+    </label>
+
+    <label>Parent Task ID
+        <input id="parentInput" placeholder="(optional)">
+    </label>
+
+    <label>Connect To (Dependency)
+        <input id="connectToInput" placeholder="3">
+    </label>
+
+    <label>Connector Type
+        <select id="connectorTypeInput">
+            <option value="">None</option>
+            <option value="start-start">start-start</option>
+            <option value="start-finish">start-finish</option>
+            <option value="finish-start">finish-start</option>
+            <option value="finish-finish">finish-finish</option>
+        </select>
+    </label>
+
+    <button onclick="addItem()">Add Child Task</button>
+</div> -->
   <!-- ✅ Custom Toolbar -->
   <div class="toolbar">
     <div style="display:flex; align-items:center; gap:12px;">
@@ -109,6 +149,8 @@
       <button id="saveXLSX"> <span class="material-icons" style="color:#2E7D32;">grid_on</span>XLSX</button>
       <button id="printBtn"><span class="material-icons">print</span> Print</button>
       <button id="fullscreenBtn"><span class="material-icons">fullscreen</span> Full Screen</button>
+      <button onclick="addChildTask()">Add Child Task</button>
+
       <!-- <label class="switch">
           <input type="checkbox" id="toggleSwitch">
           <span class="slider"></span>
