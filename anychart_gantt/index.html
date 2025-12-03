@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>AnyChart Gantt Example</title>
+
+  <script src="https://cdn.anychart.com/releases/8.13.0/js/anychart-bundle.min.js"></script>
+
+  <link rel="stylesheet" href="anyChart.css">
+  <script src="script.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.anychart.com/releases/8.13.0/js/anychart-ui.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.13.0/css/anychart-ui.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.anychart.com/releases/8.13.0/fonts/css/anychart-font.min.css" />
+  <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
+
+  <!-- <style>
+    /* Toggle Switch Style */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(72, 72, 129);
+      font-weight: 600;
+      font-size: 13px;
+      font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+    }
+
+    .slider:before {
+      background-color: rgb(213, 42, 42);
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .toggle-div {
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .toggle-div.active {
+      visibility: visible;
+      height: 600px;
+      /* or your chart height */
+    }
+
+    /* ===== Modal form styles ===== */
+    #taskFormModal {
+      display: none;
+      /* hidden by default */
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #taskFormModal .modal-content {
+      background: #fff;
+      padding: 16px 20px;
+      border-radius: 8px;
+      min-width: 320px;
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+    }
+
+    #taskFormModal h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    #taskFormModal label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    #taskFormModal input,
+    #taskFormModal select {
+      width: 100%;
+      padding: 4px 6px;
+      margin-top: 2px;
+      box-sizing: border-box;
+    }
+
+    #taskFormModal .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+  </style> -->
+
+</head>
+
+<body>
+  <!-- ✅ Custom Toolbar
+  <div class="toolbar">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button id="savePNG"><span class="material-icons" style="color:#4CAF50;">image</span>PNG</button>
+      <button id="saveJPG"><span class="material-icons" style="color:#4CAF50;">photo</span>JPG</button>
+      <button id="saveSVG"><span class="material-icons" style="color:#2196F3;">gesture</span>SVG</button>
+      <button id="savePDF"><span class="material-icons" style="color:#E53935;">picture_as_pdf</span>PDF</button>
+      <button id="saveCSV"><span class="material-icons" style="color:#9C27B0;">table_chart</span>CSV</button>
+      <button id="saveXLSX"><span class="material-icons" style="color:#2E7D32;">grid_on</span>XLSX</button>
+      <button id="printBtn"><span class="material-icons">print</span> Print</button>
+      <button id="fullscreenBtn"><span class="material-icons">fullscreen</span> Full Screen</button>
+      
+      <button id="saveJSON">
+        <span class="material-icons">save</span>update JSON
+      </button>
+
+     
+      <button type="button" onclick="openTaskForm()">Add Child Task</button>
+
+      <button type="button" onclick="openEditTaskForm()">Edit Selected Task</button>
+
+
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch">
+        <span class="slider" id="toggleText">Gantt</span>
+      </label>
+    </div>
+  </div> -->
+  <div class="toolbar">
+    <div style="display:flex; align-items:center; gap:12px;">
+
+      <!-- 🔽 Export dropdown -->
+      <div class="export-dropdown">
+        <button class="export-toggle" type="button">
+          <span class="material-icons">file_download</span>
+          Export
+          <span class="material-icons export-arrow">expand_more</span>
+        </button>
+
+        <div class="export-menu">
+          <button id="savePNG" type="button">
+            <span class="material-icons" style="color:#4CAF50;">image</span>
+            PNG
+          </button>
+          <button id="saveJPG" type="button">
+            <span class="material-icons" style="color:#4CAF50;">photo</span>
+            JPG
+          </button>
+          <button id="saveSVG" type="button">
+            <span class="material-icons" style="color:#2196F3;">gesture</span>
+            SVG
+          </button>
+          <button id="savePDF" type="button">
+            <span class="material-icons" style="color:#E53935;">picture_as_pdf</span>
+            PDF
+          </button>
+          <button id="saveCSV" type="button">
+            <span class="material-icons" style="color:#9C27B0;">table_chart</span>
+            CSV
+          </button>
+          <button id="saveXLSX" type="button">
+            <span class="material-icons" style="color:#2E7D32;">grid_on</span>
+            XLSX
+          </button>
+          <button id="printBtn" type="button">
+            <span class="material-icons">print</span>
+            Print
+          </button>
+          <button id="fullscreenBtn" type="button">
+            <span class="material-icons">fullscreen</span>
+            Full Screen
+          </button>
+        </div>
+      </div>
+
+      <!-- 🔽 Columns dropdown -->
+      <div class="columns-dropdown">
+        <button class="columns-toggle" type="button">
+          <span class="material-icons">view_week</span>
+          Columns
+          <span class="material-icons">expand_more</span>
+        </button>
+
+        <div class="columns-menu">
+          <label><input type="checkbox" id="col-title" checked> Title</label>
+          <label><input type="checkbox" id="col-relation" checked> Relation</label>
+          <label><input type="checkbox" id="col-duration" checked> Duration</label>
+          <label><input type="checkbox" id="col-base-start" checked> Baseline Start Date</label>
+          <label><input type="checkbox" id="col-base-end" checked> Baseline End Date</label>
+          <label><input type="checkbox" id="col-start" checked> Actual Start Date</label>
+          <label><input type="checkbox" id="col-end" checked> Actual End Date</label>
+          <label><input type="checkbox" id="col-progress" checked> Progress</label>
+          <label><input type="checkbox" id="col-status" checked> Status</label>
+          <label><input type="checkbox" id="col-assignee" checked> Assignee</label>
+        </div>
+
+      </div>
+
+      <!-- keep JSON / tasks / toggle as they are -->
+      <button id="saveJSON" type="button">Refresh</button>
+
+      <button type="button" onclick="openTaskForm()">Add Child</button>
+      <button type="button" onclick="openEditTaskForm()">Update</button>
+
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch">
+        <span class="slider" id="toggleText">Gantt</span>
+      </label>
+    </div>
+  </div>
+
+
+  <!-- 🔽 Gantt / PERT Containers -->
+  <div id="container" class="toggle-div active" style="height: 600px;"></div>
+  <div id="pertContainer" class="toggle-div" style="height: 900px;"></div>
+
+  <!-- 🔽 Modal Form for New Task -->
+  <div id="taskFormModal">
+    <div class="modal-content">
+      <h3>Add Child Task</h3>
+
+
+      <!-- 🔹 NEW: parent info -->
+      <!-- <p style="font-size:12px; margin: 4px 0 10px; color:#555;">
+        Parent Task ID:
+        <strong id="parentTaskId">-</strong>
+      </p> -->
+      <p style="font-size:12px; margin: 4px 0 10px; color:#555;">
+        <span id="taskIdLabel">Parent Task ID:</span>
+        <strong id="taskIdValue">-</strong>
+      </p>
+
+
+
+      <!-- <form id="taskForm" onsubmit="addChildTaskFromForm(event)"> -->
+      <form id="taskForm" onsubmit="handleTaskFormSubmit(event)">
+
+        <label>
+          Task Name
+          <input type="text" id="taskName" required>
+        </label>
+        <label>
+          Relation
+          <input type="text" id="taskRelation" placeholder="e.g. FS, SS, custom">
+        </label>
+        <label>
+          Duration
+          <input type="number" id="taskDuration" min="0" value="0" placeholder="0">
+        </label>
+
+        <label>
+          Baseline Start Date
+          <input type="date" id="baselineStartDate">
+        </label>
+
+        <label>
+          Baseline End Date
+          <input type="date" id="baselineEndDate">
+        </label>
+
+        <label>
+          Actual Start Date
+          <input type="date" id="actualStartDate">
+        </label>
+
+        <label>
+          Actual End Date
+          <input type="date" id="actualEndDate">
+        </label>
+        <label>
+          Progress (%)
+          <input type="number" id="taskProgress" min="0" max="100" value="0">
+        </label>
+        <label>
+          Status
+          <select id="taskStatus">
+            <option value="PLANNED">PLANNED</option>
+            <option value="IN_PROGRESS">IN_PROGRESS</option>
+            <option value="DONE">DONE</option>
+          </select>
+        </label>
+
+        <label>
+          Assignee
+          <input type="text" id="taskAssignee" placeholder="nitish jaganwar">
+        </label>
+
+        <div class="actions">
+          <button type="button" onclick="closeTaskForm()">Cancel</button>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /* ==== Toggle Gantt / PERT ==== */
+    const toggleBtn = document.getElementById('toggleSwitch');
+    const div1 = document.getElementById('container');
+    const div2 = document.getElementById('pertContainer');
+    const toggleText = document.getElementById('toggleText');
+
+    toggleBtn.addEventListener('change', () => {
+      div1.classList.toggle('active');
+      div2.classList.toggle('active');
+
+      if (toggleBtn.checked) {
+        toggleText.textContent = 'PERT';
+      } else {
+        toggleText.textContent = 'Gantt';
+      }
+    });
+
+    /* ==== Export dropdown toggle ==== */
+    const exportToggle = document.querySelector('.export-toggle');
+    const exportMenu = document.querySelector('.export-menu');
+
+    if (exportToggle && exportMenu) {
+      exportToggle.addEventListener('click', () => {
+        exportMenu.classList.toggle('open');
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!exportMenu.contains(e.target) && !exportToggle.contains(e.target)) {
+          exportMenu.classList.remove('open');
+        }
+      });
+    }
+
+    /* ==== Columns dropdown toggle ==== */
+    const columnsToggle = document.querySelector('.columns-toggle');
+    const columnsMenu = document.querySelector('.columns-menu');
+
+    if (columnsToggle && columnsMenu) {
+      columnsToggle.addEventListener('click', () => {
+        columnsMenu.classList.toggle('open');
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!columnsMenu.contains(e.target) && !columnsToggle.contains(e.target)) {
+          columnsMenu.classList.remove('open');
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>

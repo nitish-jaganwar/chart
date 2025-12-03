@@ -1,0 +1,215 @@
+/* anyChart.css — cleaned and simplified
+   - Removed large commented blocks and duplicate rules
+   - Fixed invalid selector `colAction` -> `.colAction`
+   - Kept toolbar, controls, button styles, container sizing, and AnyChart font forcing
+*/
+
+.form-box { width: 360px; padding: 15px; border: 1px solid #ccc; border-radius: 6px; }
+    .form-box label { display: block; font-size: 13px; margin-top: 10px; }
+    .form-box input, select {
+        width: 100%; padding: 6px; margin-top: 3px; box-sizing: border-box;
+    }
+/* Page + containers */
+html, body, #container, #pertContainer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+  background-color: #f9fafb;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+/* Chart containers */
+#container,
+#pertContainer,
+#chartContainer {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Controls area */
+#controls {
+  font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;            /* reduced from 12 */
+  padding: 4px 8px;    /* reduced from 8px 16px */
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;  /* reduced from 12 */
+  background: #ffffff;
+  box-shadow: none;    /* remove shadow for minimalist UI */
+}
+
+
+.toolbar button,
+.toolbar select {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.toolbar button:hover,
+.toolbar select:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.toolbar button:active {
+  background: #e5e7eb;
+  transform: scale(0.98);
+}
+
+/* Material Icons alignment */
+/* .toolbar .material-icons {
+  font-size: 18px;
+  color: #6b7280;
+  vertical-align: middle;
+} */
+.toolbar .material-icons {
+  font-size: 16px; 
+  vertical-align: middle;  /* reduced for cleaner look */
+}
+
+
+/* Toolbar layout helpers */
+.toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Responsive toolbar */
+@media (max-width: 700px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Inline action button group */
+.proj-action-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.proj-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 18px;
+  color: #475569;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proj-action-btn .material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.proj-action-btn:hover {
+  background: #e2e8f0;
+  color: #0d47a1;
+}
+
+/* Task name */
+.task-name {
+  font-weight: 400;
+  color: #334155;
+}
+
+/* Colored icon helpers (use IDs on buttons in HTML) */
+#childbtn  { color: #16a34a; } /* green */
+#updatebtn { color: #2563eb; } /* blue */
+#viewbtn   { color: #7c3aed; } /* purple */
+
+/* Export/utility buttons color hints */
+#saveCSV, #savePNG, #saveJPG, #saveSVG, #savePDF, #saveXLSX, #printBtn {
+  color: #2c59a7;
+}
+
+/* Fix for action-column (was invalid selector in original) */
+.colAction {
+  pointer-events: none;
+}
+
+/* Toggle/menu button */
+.menu-btn {
+  border: none;
+  background: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.menu-btn:hover { background: #f1f5f9; }
+.menu-btn .material-icons { font-size: 22px; color: #334155; }
+
+/* Simple menu items */
+.menu-item {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background-color: #f0f0f0; }
+
+/* Force AnyChart elements to use Inter */
+.anychart,
+.anychart-title,
+.anychart-labels,
+.anychart-ui,
+.anychart-gantt,
+.anychart-gantt-datagrid,
+.anychart-gantt-timeline,
+.anychart-tooltip,
+.anychart-context-menu,
+.anychart-credits,
+.anychart-chart,
+.anychart-legend {
+  font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+}
+
+/* Select appearance */
+select { appearance: none; padding-right: 20px; }
+
+/* Toggle div helper (used by your HTML) */
+.toggle-div { display: none; margin-top:0px; padding: 0; border-radius: 2px; }
+.toggle-div.active { display: block; }

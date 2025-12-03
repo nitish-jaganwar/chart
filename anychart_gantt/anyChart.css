@@ -1,0 +1,453 @@
+/* =========================================================
+   anyChart.css  (cleaned & ordered)
+   Sections:
+   1) Base layout
+   2) Toolbar & buttons
+   3) Export dropdown
+   4) Gantt / PERT toggle switch
+   5) Toggle containers (Gantt / PERT)
+   6) Modal (Add / Edit Task)
+   7) Gantt row action buttons (Datagrid)
+   8) AnyChart font overrides
+   ========================================================= */
+
+
+   
+/* ========== 1. Base layout ========== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Chart containers (height is controlled inline in HTML) */
+#container,
+#pertContainer {
+  width: 100%;
+}
+
+/* Generic select look (for status etc.) */
+select {
+  appearance: none;
+  padding-right: 20px;
+}
+
+
+/* ========== 2. Toolbar & buttons ========== */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar button,
+.toolbar select {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.toolbar button:hover,
+.toolbar select:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.toolbar button:active {
+  background: #e5e7eb;
+  transform: scale(0.98);
+}
+
+/* Material icon sizing inside toolbar */
+.toolbar .material-icons {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+/* Responsive toolbar */
+@media (max-width: 700px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* ========== 3. Export dropdown ========== */
+
+.export-dropdown {
+  position: relative;
+}
+
+.export-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+.export-toggle .material-icons {
+  font-size: 18px;
+}
+
+.export-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  padding: 4px 0;
+  display: none; /* hidden by default */
+  z-index: 2000;
+}
+
+.export-menu.open {
+  display: block;
+}
+
+.export-menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  text-align: left;
+}
+
+.export-menu button:hover {
+  background: #f3f4f6;
+}
+
+.export-menu .material-icons {
+  font-size: 18px;
+}
+
+
+/* ===== Columns dropdown FOF HIDE (similar to Export) ===== */
+.columns-dropdown {
+  position: relative;
+}
+
+.columns-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+.columns-toggle .material-icons {
+  font-size: 18px;
+}
+
+.columns-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  padding: 4px 0;
+  display: none;
+  z-index: 2000;
+}
+
+.columns-menu.open {
+  display: block;
+}
+
+.columns-menu label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.columns-menu label:hover {
+  background: #f3f4f6;
+}
+
+.columns-menu input[type="checkbox"] {
+  margin: 0;
+}
+
+
+
+/* ========== 4. Gantt / PERT toggle switch ========== */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* We use the slider just as a pill with text ("Gantt" / "PERT") */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #e5e7eb;
+  transition: 0.2s;
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+
+/* ========== 5. Toggle Gantt / PERT containers ========== */
+
+.toggle-div {
+  display: none;
+  margin-top: 4px;
+}
+
+.toggle-div.active {
+  display: block;
+}
+
+
+/* ========== 6. Modal: Add / Edit Task ========== */
+
+#taskFormModal {
+  display: none; /* hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+#taskFormModal .modal-content {
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 8px;
+  min-width: 320px;
+  max-width: 420px;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+#taskFormModal h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#taskFormModal p {
+  margin: 4px 0 12px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+#taskFormModal label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #334155;
+}
+
+#taskFormModal input,
+#taskFormModal select {
+  width: 100%;
+  padding: 4px 6px;
+  margin-top: 2px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  font-size: 13px;
+}
+
+#taskFormModal input:focus,
+#taskFormModal select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+#taskFormModal .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+#taskFormModal .actions button {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#taskFormModal .actions button[type="button"] {
+  background: #f9fafb;
+}
+
+#taskFormModal .actions button[type="submit"] {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+#taskFormModal .actions button[type="submit"]:hover {
+  background: #1d4ed8;
+}
+
+
+/* ========== 7. Gantt row action buttons (inside AnyChart datagrid) ========== */
+
+.proj-action-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.proj-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 18px;
+  color: #475569;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proj-action-btn .material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.proj-action-btn:hover {
+  background: #e2e8f0;
+  color: #0d47a1;
+}
+
+/* Task name in datagrid (used via .task-name span) */
+.task-name {
+  font-weight: 400;
+  color: #334155;
+}
+
+/* Colored icon helpers by ID (if you still use these IDs inside labels) */
+#childbtn {
+  color: #16a34a; /* green */
+}
+
+#updatebtn {
+  color: #2563eb; /* blue */
+}
+
+#viewbtn {
+  color: #7c3aed; /* purple */
+}
+
+/* Optional: mild color hint for export buttons if referenced by ID */
+#saveCSV,
+#savePNG,
+#saveJPG,
+#saveSVG,
+#savePDF,
+#saveXLSX,
+#printBtn {
+  color: #2c59a7;
+}
+
+
+/* ========== 8. AnyChart font overrides ========== */
+
+.anychart,
+.anychart-title,
+.anychart-labels,
+.anychart-ui,
+.anychart-gantt,
+.anychart-gantt-datagrid,
+.anychart-gantt-timeline,
+.anychart-tooltip,
+.anychart-context-menu,
+.anychart-credits,
+.anychart-chart,
+.anychart-legend {
+  font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+}

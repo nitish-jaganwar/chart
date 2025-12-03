@@ -1,0 +1,329 @@
+[
+  {
+    "id": "0",
+    "name": "tBits_Implementation_in_JSPL_Angul_Phase_2_Expansion_Project_Plan_Baseline",
+    "actualStart": "2021-11-01T09:30",
+    "actualEnd": "2022-01-21T15:18",
+    "progressValue": "15.0%",
+    "children": [
+      {
+        "id": "1",
+        "name": "APMSIDC-GoAP",
+        "actualStart": "2021-11-01T09:30",
+        "actualEnd": "2022-01-21T15:18",
+        "progressValue": "70.0%",
+        "status": "PENDING",
+        "assignee": "nitish",
+        "children": [
+          {
+            "id": "2",
+            "name": "tBits Collabwrite Deployment",
+            "actualStart": "2021-11-01T09:30",
+            "actualEnd": "2022-01-21T15:18",
+            "progressValue": "40.0%",
+            "children": [
+              {
+                "id": "3",
+                "name": "NTP + Moblisation period",
+                "actualStart": "2021-11-01",
+                "actualEnd": "2021-12-04",
+                "progressValue": "100.0%",
+                "status": "DONE",
+                "assignee": "ritesh tripathi",
+                "children": [
+                  {
+                    "id": "task_1763982987739",
+                    "name": "test1",
+                    "actualStart": "2021-11-01",
+                    "actualEnd": "2021-12-31",
+                    "progressValue": "50%",
+                    "status": "IN_PROGRESS",
+                    "assignee": "nitish kumar"
+                  }
+                ]
+              },
+              {
+                "id": "4",
+                "name": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
+                "actualStart": "2021-11-04T09:30",
+                "actualEnd": "2021-12-21T15:18",
+                "progressValue": "20.0%",
+                "connectTo": "3",
+                "children": [
+                  {
+                    "id": "5",
+                    "name": "Installation",
+                    "actualStart": "2021-11-04T09:30",
+                    "actualEnd": "2021-11-11T09:30",
+                    "progressValue": "30.0%",
+                    "children": [
+                      {
+                        "id": "6",
+                        "name": "Installation of tBits [ 2 instances] + 1 DR Instance",
+                        "actualStart": "2021-11-04T09:30",
+                        "actualEnd": "2021-11-05T09:30",
+                        "progressValue": "70.0%"
+                      },
+                      {
+                        "id": "7",
+                        "name": "Integration with LDAP Server & Central Authentication Service",
+                        "actualStart": "2021-11-05T09:30",
+                        "actualEnd": "2021-11-07T09:30",
+                        "progressValue": "80.0%",
+                        "connectTo": "6",
+                        "connectorType": "start-finish"
+                      },
+                      {
+                        "id": "8",
+                        "name": "Integration with email server - incoming & outgoing emails",
+                        "actualStart": "2021-11-07T09:30",
+                        "actualEnd": "2021-11-08T09:30",
+                        "progressValue": "25.0%",
+                        "connectTo": "5"
+                      },
+                      {
+                        "id": "9",
+                        "name": "Load Balancer Configuration - HA Proxy, KeepAlived, Floating IP",
+                        "actualStart": "2021-11-08T09:30",
+                        "actualEnd": "2021-11-09T09:30",
+                        "progressValue": "50.0%",
+                        "connectTo": "8"
+                      },
+                      {
+                        "id": "10",
+                        "name": "DR Server Setup - including MySQL DB Replication + rSync Files",
+                        "actualStart": "2021-11-09T09:30",
+                        "actualEnd": "2021-11-10T09:30",
+                        "progressValue": "60.0%",
+                        "connectTo": "9"
+                      },
+                      {
+                        "id": "11",
+                        "name": "Documentation - Production Support Manual",
+                        "actualStart": "2021-11-04T09:30",
+                        "actualEnd": "2021-11-10T09:30",
+                        "progressValue": "10.0%"
+                      },
+                      {
+                        "id": "12",
+                        "name": "Support Process Set-up for Client Users [another BA in the same tBits installation]",
+                        "actualStart": "2021-11-10T09:30",
+                        "actualEnd": "2021-11-11T09:30",
+                        "progressValue": "80.0%",
+                        "connectTo": "11"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "13",
+                    "name": "Customization : tBits for First Project as per client coordination & control process",
+                    "actualStart": "2021-11-14T09:30",
+                    "actualEnd": "2021-12-19T10:18",
+                    "progressValue": "35.0%",
+                    "children": [
+                      {
+                        "id": "14",
+                        "name": "First Project Customization",
+                        "actualStart": "2021-11-14T09:30",
+                        "actualEnd": "2021-11-22T09:30",
+                        "progressValue": "30.0%",
+                        "children": [
+                          {
+                            "id": "15",
+                            "name": "Configuration of the Business Areas",
+                            "actualStart": "2021-11-14T09:30",
+                            "actualEnd": "2021-11-19T09:30",
+                            "progressValue": "30.0%",
+                            "connectTo": "3"
+                          },
+                          {
+                            "id": "16",
+                            "name": "Business Area Rules & Workflows",
+                            "actualStart": "2021-11-19T09:30",
+                            "actualEnd": "2021-11-20T09:30",
+                            "progressValue": "10.0%",
+                            "connectTo": "15"
+                          },
+                          {
+                            "id": "17",
+                            "name": "Permissions / RBAC",
+                            "actualStart": "2021-11-20T09:30",
+                            "actualEnd": "2021-11-21T09:30",
+                            "progressValue": "70.0%",
+                            "connectTo": "16"
+                          },
+                          {
+                            "id": "18",
+                            "name": "Testing by the tBits team",
+                            "actualStart": "2021-11-21T09:30",
+                            "actualEnd": "2021-11-22T09:30",
+                            "progressValue": "40.0%",
+                            "connectTo": "17"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "19",
+                        "name": "UAT-1 with the client team",
+                        "actualStart": "2021-11-22T09:30",
+                        "actualEnd": "2021-11-24T09:30",
+                        "progressValue": "20.0%",
+                        "connectTo": "18"
+                      },
+                      {
+                        "id": "20",
+                        "name": "Incorporation of the comments",
+                        "actualStart": "2021-11-24T09:30",
+                        "actualEnd": "2021-11-25T09:30",
+                        "progressValue": "75.0%",
+                        "connectTo": "19"
+                      },
+                      {
+                        "id": "21",
+                        "name": "UAT-2 with the client team",
+                        "actualStart": "2021-11-25T09:30",
+                        "actualEnd": "2021-11-26T09:30",
+                        "progressValue": "25.0%",
+                        "connectTo": "20"
+                      },
+                      {
+                        "id": "22",
+                        "name": "Incorporation of the comments",
+                        "actualStart": "2021-11-26T09:30",
+                        "actualEnd": "2021-11-27T09:30",
+                        "progressValue": "15.0%",
+                        "connectTo": "21"
+                      },
+                      {
+                        "id": "23",
+                        "name": "Documentation & Reports",
+                        "actualStart": "2021-11-27T09:30",
+                        "actualEnd": "2021-11-29T09:30",
+                        "progressValue": "30.0%",
+                        "connectTo": "22"
+                      },
+                      {
+                        "id": "24",
+                        "name": "Readiness for GoLive",
+                        "actualStart": "2021-11-29T09:30",
+                        "actualEnd": "2021-11-29T10:18",
+                        "progressValue": "10.0%",
+                        "connectTo": "23"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "25",
+                    "name": "Import of Historical Data",
+                    "actualStart": "2021-12-04T09:30",
+                    "actualEnd": "2021-12-12T09:30",
+                    "progressValue": "20.0%",
+                    "children": [
+                      {
+                        "id": "26",
+                        "name": "Specifications of Program to be created for the import of data",
+                        "actualStart": "2021-12-04T09:30",
+                        "actualEnd": "2021-12-05T09:30",
+                        "progressValue": "10.0%",
+                        "connectTo": "3"
+                      },
+                      {
+                        "id": "27",
+                        "name": "Sample Data Import",
+                        "actualStart": "2021-12-05T09:30",
+                        "actualEnd": "2021-12-07T09:30",
+                        "progressValue": "25.0%",
+                        "connectTo": "26"
+                      },
+                      {
+                        "id": "28",
+                        "name": "Sample Data Verification",
+                        "actualStart": "2021-12-07T09:30",
+                        "actualEnd": "2021-12-08T09:30",
+                        "progressValue": "35.0%",
+                        "connectTo": "27"
+                      },
+                      {
+                        "id": "29",
+                        "name": "Production Run  - import of data",
+                        "actualStart": "2021-12-08T09:30",
+                        "actualEnd": "2021-12-09T09:30",
+                        "progressValue": "90.0%",
+                        "connectTo": "28"
+                      },
+                      {
+                        "id": "30",
+                        "name": "Verification by the client team",
+                        "actualStart": "2021-12-09T09:30",
+                        "actualEnd": "2021-12-10T09:30",
+                        "progressValue": "60.0%",
+                        "connectTo": "29"
+                      },
+                      {
+                        "id": "31",
+                        "name": "Data transfer to the Production server",
+                        "actualStart": "2021-12-10T09:30",
+                        "actualEnd": "2021-12-11T09:30",
+                        "progressValue": "30.0%",
+                        "connectTo": "30"
+                      },
+                      {
+                        "id": "32",
+                        "name": "Readiness for GoLive",
+                        "actualStart": "2021-12-11T09:30",
+                        "actualEnd": "2021-12-12T09:30",
+                        "progressValue": "20.0%",
+                        "connectTo": "31"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "33",
+                    "name": "End User Training",
+                    "actualStart": "2021-12-19T10:18",
+                    "actualEnd": "2022-01-21T15:18",
+                    "progressValue": "10.0%",
+                    "children": [
+                      {
+                        "id": "34",
+                        "name": "Training Session-1 PMO",
+                        "actualStart": "2021-12-19T10:18",
+                        "actualEnd": "2021-12-29T15:18",
+                        "progressValue": "15.0%",
+                        "connectTo": "24"
+                      },
+                      {
+                        "id": "35",
+                        "name": "Training Session-2 Owners' Engineer",
+                        "actualStart": "2021-12-29T15:18",
+                        "actualEnd": "2022-01-15T10:18",
+                        "progressValue": "50.0%",
+                        "connectTo": "34"
+                      },
+                      {
+                        "id": "36",
+                        "name": "Training Session-3 Existing Projects",
+                        "actualStart": "2022-01-15T10:18",
+                        "actualEnd": "2022-01-21T15:18",
+                        "progressValue": "80.0%",
+                        "connectTo": "35"
+                      },
+                      {
+                        "id": "37",
+                        "name": "GoLive Declaration",
+                        "actualStart": "2021-11-29T10:18",
+                        "actualEnd": "2021-11-29T10:18",
+                        "progressValue": "10.0%",
+                        "connectTo": "13"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
