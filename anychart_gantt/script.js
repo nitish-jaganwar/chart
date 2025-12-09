@@ -23,28 +23,152 @@ const COLUMN_MAP = {
   "col-status": 9,
   "col-assignee": 10
 };
+// Logical order of columns, tied to checkbox IDs
+let logicalColumnOrder = [
+  // "col-title",
+  "col-relation",
+  "col-duration",
+  "col-base-start",
+  "col-base-end",
+  "col-start",
+  "col-end",
+  "col-progress",
+  "col-status",
+  "col-assignee"
+];
+const COLUMN_CONFIG = {
+  "col-title": {
+    title: "Task Details",
+    configure: (col) => {
+      styleColumnTitle(col, "Task Details");
+      styleColumnLabels(col);
+      col.width(250);
+      col.labels().useHtml(true);
+      col.collapseExpandButtons(true);
+      col.depthPaddingMultiplier(20);
+      col.labels().format(function () {
+        const item = this.item;
+        const name = item && item.get ? item.get("name") : "(Unnamed)";
+        const safeName = String(name).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const isParent = item && item.numChildren && item.numChildren() > 0;
+        const style = isParent
+          ? "font-weight:600; color:#0d47a1;font-family: Inter, Helvetica, Arial, sans-serif"
+          : "font-weight:400; color:#374151;font-family: Inter, Helvetica, Arial, sans-serif";
+        return `<span style="${style}">${safeName}</span>`;
+      });
+    }
+  },
 
+  "col-relation": {
+    title: "Relation",
+    configure: (col) => {
+      styleColumnTitle(col, "Relation");
+      styleColumnLabels(col);
+      col.width(90);
+      col.labels().format("{%relation}");
+    }
+  },
 
+  "col-duration": {
+    title: "Duration",
+    configure: (col) => {
+      styleColumnTitle(col, "Duration");
+      styleColumnLabels(col);
+      col.width(90);
+      col.labels().format("{%duration}");
+    }
+  },
+
+  "col-base-start": {
+    title: "Baseline Start Date",
+    configure: (col) => {
+      styleColumnTitle(col, "Baseline Start Date");
+      styleColumnLabels(col);
+      col.width(110);
+      col.labels().format("{%baselineStartDate}{dateTimeFormat:dd MMM yyyy}");
+    }
+  },
+
+  "col-base-end": {
+    title: "Baseline End Date",
+    configure: (col) => {
+      styleColumnTitle(col, "Baseline End Date");
+      styleColumnLabels(col);
+      col.width(110);
+      col.labels().format("{%baselineEndDate}{dateTimeFormat:dd MMM yyyy}");
+    }
+  },
+
+  "col-start": {
+    title: "Actual Start Date",
+    configure: (col) => {
+      styleColumnTitle(col, "Actual Start Date");
+      styleColumnLabels(col);
+      col.width(110);
+      col.labels().format("{%actualStart}{dateTimeFormat:dd MMM yyyy}");
+    }
+  },
+
+  "col-end": {
+    title: "Actual End Date",
+    configure: (col) => {
+      styleColumnTitle(col, "Actual End Date");
+      styleColumnLabels(col);
+      col.width(110);
+      col.labels().format("{%actualEnd}{dateTimeFormat:dd MMM yyyy}");
+    }
+  },
+
+  "col-progress": {
+    title: "Progress (%)",
+    configure: (col) => {
+      styleColumnTitle(col, "Progress (%)");
+      styleColumnLabels(col);
+      col.width(90);
+      col.labels().format("{%progressValue}");
+    }
+  },
+
+  "col-status": {
+    title: "Status",
+    configure: (col) => {
+      styleColumnTitle(col, "Status");
+      styleColumnLabels(col);
+      col.width(90);
+      col.labels().format("{%status}");
+    }
+  },
+
+  "col-assignee": {
+    title: "Assignee",
+    configure: (col) => {
+      styleColumnTitle(col, "Assignee");
+      styleColumnLabels(col);
+      col.width(110);
+      col.labels().format("{%assignee}");
+    }
+  }
+};
 
 
 // === Helper: get root task name for export filenames ===
-function getRootTaskName() {
-  if (!window.treeData || typeof window.treeData.getChildren !== "function") {
-    return "project";
-  }
+// function getRootTaskName() {
+//   if (!window.treeData || typeof window.treeData.getChildren !== "function") {
+//     return "project";
+//   }
 
-  const roots = window.treeData.getChildren();
-  if (!roots || roots.length === 0) {
-    return "project";
-  }
+//   const roots = window.treeData.getChildren();
+//   if (!roots || roots.length === 0) {
+//     return "project";
+//   }
 
-  const rootNode = roots[0];
-  const name = rootNode.get ? rootNode.get("name") : rootNode.name;
-  if (!name) return "project";
+//   const rootNode = roots[0];
+//   const name = rootNode.get ? rootNode.get("name") : rootNode.name;
+//   if (!name) return "project";
 
-  // Clean up name for safe file naming (remove spaces/special chars)
-  return name.replace(/[^a-zA-Z0-9-_]/g, "_");
-}
+//   // Clean up name for safe file naming (remove spaces/special chars)
+//   return name.replace(/[^a-zA-Z0-9-_]/g, "_");
+// }
 
 // Start once DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,6 +196,8 @@ function createChartHandler(methodName) {
     const activeChart = getActiveChart();
     if (activeChart && typeof activeChart[methodName] === "function") {
       // filename is controlled globally via anychart.exports.filename()
+      const defaultName = "NITISH";
+      anychart.exports.filename(defaultName);
       activeChart[methodName]();
     } else {
       console.warn(`Action "${methodName}" not supported or no active chart found.`);
@@ -255,7 +381,7 @@ async function exportGanttAsJson() {
 
   const a = document.createElement("a");
   a.href = url;
-  const rootName = getRootTaskName();
+  const rootName = "data";
   a.download = `${rootName}.json`;
 
   document.body.appendChild(a);
@@ -599,9 +725,10 @@ async function createGanttChart() {
   chartInstance = chart;
 
   // Set default export filename for AnyChart (PNG, PDF, CSV, XLSX, etc.)
-  const rootName = getRootTaskName();
-  anychart.exports.filename(rootName);
-
+ // const rootName = getRootTaskName();
+  //anychart.exports.filename(rootName);
+  //anychart.exports.filename("My_Custom_Project_Report");
+  
   chart.data(treeData);
   chart.title().fontFamily("Inter, Helvetica, Arial");
   chart.tooltip().fontFamily("Inter, Helvetica, Arial");
@@ -662,95 +789,95 @@ async function createGanttChart() {
     return col;
   }
 
-  // 1) Title (Task Name) – column 1
-  const colTask = dataGrid.column(1);
-  styleColumnTitle(colTask, "Task Details");
-  styleColumnLabels(colTask);
-  colTask.width(250);
-  colTask.labels().useHtml(true);
-  colTask.collapseExpandButtons(true);
-  colTask.depthPaddingMultiplier(20);
-  colTask.labels().format(function () {
-    const item = this.item;
-    const name = item && item.get ? item.get("name") : "(Unnamed)";
-    const safeName = String(name).replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    const isParent = item && item.numChildren && item.numChildren() > 0;
-    const style = isParent
-      ? "font-weight:600; color:#0d47a1;font-family: Inter, Helvetica, Arial, sans-serif"
-      : "font-weight:400; color:#374151;font-family: Inter, Helvetica, Arial, sans-serif";
-    return `<span style="${style}">${safeName}</span>`;
-  });
+  // // 1) Title (Task Name) – column 1
+  // const colTask = dataGrid.column(1);
+  // styleColumnTitle(colTask, "Task Details");
+  // styleColumnLabels(colTask);
+  // colTask.width(250);
+  // colTask.labels().useHtml(true);
+  // colTask.collapseExpandButtons(true);
+  // colTask.depthPaddingMultiplier(20);
+  // colTask.labels().format(function () {
+  //   const item = this.item;
+  //   const name = item && item.get ? item.get("name") : "(Unnamed)";
+  //   const safeName = String(name).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  //   const isParent = item && item.numChildren && item.numChildren() > 0;
+  //   const style = isParent
+  //     ? "font-weight:600; color:#0d47a1;font-family: Inter, Helvetica, Arial, sans-serif"
+  //     : "font-weight:400; color:#374151;font-family: Inter, Helvetica, Arial, sans-serif";
+  //   return `<span style="${style}">${safeName}</span>`;
+  // });
 
-  // 2) Relation – column 2
-  const colRelation = dataGrid.column(2);
-  styleColumnTitle(colRelation, "Relation");
-  styleColumnLabels(colRelation);
-  colRelation.width(90);
-  colRelation.labels().format("{%relation}");
+  // // 2) Relation – column 2
+  // const colRelation = dataGrid.column(2);
+  // styleColumnTitle(colRelation, "Relation");
+  // styleColumnLabels(colRelation);
+  // colRelation.width(90);
+  // colRelation.labels().format("{%relation}");
 
-  // 3) Duration – column 3
-  const colDuration = dataGrid.column(3);
-  styleColumnTitle(colDuration, "Duration");
-  styleColumnLabels(colDuration);
-  colDuration.width(90);
-  colDuration.labels().format("{%duration}");
+  // // 3) Duration – column 3
+  // const colDuration = dataGrid.column(3);
+  // styleColumnTitle(colDuration, "Duration");
+  // styleColumnLabels(colDuration);
+  // colDuration.width(90);
+  // colDuration.labels().format("{%duration}");
 
-  // 4) Baseline Start Date – column 4
-  const colBaselineStart = dataGrid.column(4);
-  styleColumnTitle(colBaselineStart, "Baseline Start Date");
-  styleColumnLabels(colBaselineStart);
-  colBaselineStart.width(110);
-  colBaselineStart
-    .labels()
-    .format("{%baselineStartDate}{dateTimeFormat:dd MMM yyyy}");
+  // // 4) Baseline Start Date – column 4
+  // const colBaselineStart = dataGrid.column(4);
+  // styleColumnTitle(colBaselineStart, "Baseline Start Date");
+  // styleColumnLabels(colBaselineStart);
+  // colBaselineStart.width(110);
+  // colBaselineStart
+  //   .labels()
+  //   .format("{%baselineStartDate}{dateTimeFormat:dd MMM yyyy}");
 
-  // 5) Baseline End Date – column 5
-  const colBaselineEnd = dataGrid.column(5);
-  styleColumnTitle(colBaselineEnd, "Baseline End Date");
-  styleColumnLabels(colBaselineEnd);
-  colBaselineEnd.width(110);
-  colBaselineEnd
-    .labels()
-    .format("{%baselineEndDate}{dateTimeFormat:dd MMM yyyy}");
+  // // 5) Baseline End Date – column 5
+  // const colBaselineEnd = dataGrid.column(5);
+  // styleColumnTitle(colBaselineEnd, "Baseline End Date");
+  // styleColumnLabels(colBaselineEnd);
+  // colBaselineEnd.width(110);
+  // colBaselineEnd
+  //   .labels()
+  //   .format("{%baselineEndDate}{dateTimeFormat:dd MMM yyyy}");
 
-  // 6) Actual Start Date – column 6
-  const colActualStart = dataGrid.column(6);
-  styleColumnTitle(colActualStart, "Actual Start Date");
-  styleColumnLabels(colActualStart);
-  colActualStart.width(110);
-  colActualStart
-    .labels()
-    .format("{%actualStart}{dateTimeFormat:dd MMM yyyy}");
+  // // 6) Actual Start Date – column 6
+  // const colActualStart = dataGrid.column(6);
+  // styleColumnTitle(colActualStart, "Actual Start Date");
+  // styleColumnLabels(colActualStart);
+  // colActualStart.width(110);
+  // colActualStart
+  //   .labels()
+  //   .format("{%actualStart}{dateTimeFormat:dd MMM yyyy}");
 
-  // 7) Actual End Date – column 7
-  const colActualEnd = dataGrid.column(7);
-  styleColumnTitle(colActualEnd, "Actual End Date");
-  styleColumnLabels(colActualEnd);
-  colActualEnd.width(110);
-  colActualEnd
-    .labels()
-    .format("{%actualEnd}{dateTimeFormat:dd MMM yyyy}");
+  // // 7) Actual End Date – column 7
+  // const colActualEnd = dataGrid.column(7);
+  // styleColumnTitle(colActualEnd, "Actual End Date");
+  // styleColumnLabels(colActualEnd);
+  // colActualEnd.width(110);
+  // colActualEnd
+  //   .labels()
+  //   .format("{%actualEnd}{dateTimeFormat:dd MMM yyyy}");
 
-  // 8) Progress Percentage – column 8
-  const colProgress = dataGrid.column(8);
-  styleColumnTitle(colProgress, "Progress (%)");
-  styleColumnLabels(colProgress);
-  colProgress.width(90);
-  colProgress.labels().format("{%progressValue}");
+  // // 8) Progress Percentage – column 8
+  // const colProgress = dataGrid.column(8);
+  // styleColumnTitle(colProgress, "Progress (%)");
+  // styleColumnLabels(colProgress);
+  // colProgress.width(90);
+  // colProgress.labels().format("{%progressValue}");
 
-  // 9) Status – column 9
-  const colStatus = dataGrid.column(9);
-  styleColumnTitle(colStatus, "Status");
-  styleColumnLabels(colStatus);
-  colStatus.width(90);
-  colStatus.labels().format("{%status}");
+  // // 9) Status – column 9
+  // const colStatus = dataGrid.column(9);
+  // styleColumnTitle(colStatus, "Status");
+  // styleColumnLabels(colStatus);
+  // colStatus.width(90);
+  // colStatus.labels().format("{%status}");
 
-  // 10) Assignee – column 10
-  const colAssignee = dataGrid.column(10);
-  styleColumnTitle(colAssignee, "Assignee");
-  styleColumnLabels(colAssignee);
-  colAssignee.width(110);
-  colAssignee.labels().format("{%assignee}");
+  // // 10) Assignee – column 10
+  // const colAssignee = dataGrid.column(10);
+  // styleColumnTitle(colAssignee, "Assignee");
+  // styleColumnLabels(colAssignee);
+  // colAssignee.width(110);
+  // colAssignee.labels().format("{%assignee}");
 
   // Tooltip (optional: still uses old actualStart/actualEnd if present)
   dataGrid.tooltip().useHtml(true);
@@ -763,6 +890,8 @@ async function createGanttChart() {
     "Assignee: {%assignee}"
   );
 
+  // Configure columns in current logical order
+  setupColumns();
   // Turn off context menu
   chart.contextMenu(false);
   const menu = chart.contextMenu();
@@ -807,24 +936,227 @@ async function createGanttChart() {
   };
 
   // ==== Column visibility checkboxes ====
-  Object.entries(COLUMN_MAP).forEach(([checkboxId, colIndex]) => {
-    const checkbox = document.getElementById(checkboxId);
-    if (!checkbox) return;
+  // Object.entries(COLUMN_MAP).forEach(([checkboxId, colIndex]) => {
+  //   const checkbox = document.getElementById(checkboxId);
+  //   if (!checkbox) return;
 
-    // set default (all checked -> all visible)
-    checkbox.checked = true;
+  //   // set default (all checked -> all visible)
+  //   checkbox.checked = true;
 
+  //   checkbox.addEventListener("change", () => {
+  //     if (!chartInstance || !dataGridInstance) return;
+
+  //     const col = dataGridInstance.column(colIndex);
+  //     if (!col) return;
+
+  //     col.enabled(checkbox.checked);
+  //   });
+  // });
+
+  // checkbox.addEventListener("change", () => {
+  //   const currentIdx = logicalColumnOrder.indexOf(checkboxId);
+  //   if (currentIdx === -1) return;
+  //   const c = dataGridInstance.column(currentIdx + 1);  // ✅ dynamic index
+  //   if (c) c.enabled(checkbox.checked);
+  // });
+
+  // Init drag & drop for columns menu
+  initColumnDrag();
+}
+
+
+
+// ===== Set up columns based on logical order =====
+function setupColumns() {
+  if (!dataGridInstance) return;
+
+  // 1) Fixed TITLE column in physical column 1
+  const titleCol = dataGridInstance.column(1);
+  const titleCfg = COLUMN_CONFIG["col-title"];
+  const titleCheckbox = document.getElementById("col-title");
+
+  if (titleCfg && titleCol) {
+    titleCfg.configure(titleCol);
+
+    if (titleCheckbox) {
+      // initial state
+      titleCol.enabled(titleCheckbox.checked);
+
+      // hide/show only title column
+      titleCheckbox.addEventListener("change", () => {
+        titleCol.enabled(titleCheckbox.checked);
+      });
+    }
+  }
+
+  // 2) Reorderable columns start from physical index 2
+  // 2) Reorderable columns start from physical index 2
+logicalColumnOrder.forEach((checkboxId, idx) => {
+  const physicalIndex = idx + 2; // first configuration only
+  const cfg = COLUMN_CONFIG[checkboxId];
+  if (!cfg) return;
+
+  const col = dataGridInstance.column(physicalIndex);
+  cfg.configure(col);
+
+  const checkbox = document.getElementById(checkboxId);
+  if (checkbox) {
+    // initial state from checkbox
+    col.enabled(checkbox.checked);
+
+    // dynamic show/hide – recompute index from DOM every time
     checkbox.addEventListener("change", () => {
-      if (!chartInstance || !dataGridInstance) return;
+      if (!dataGridInstance) return;
 
-      const col = dataGridInstance.column(colIndex);
-      if (!col) return;
+      const menu = document.getElementById("columnsMenu");
+      if (!menu) return;
 
+      const ids = Array.from(
+        menu.querySelectorAll(".col-item input[type='checkbox']")
+      )
+        .map(cb => cb.id)
+        .filter(id => id !== "col-title");
+
+      const idxInOrder = ids.indexOf(checkboxId);
+      if (idxInOrder === -1) return;
+
+      const c = dataGridInstance.column(idxInOrder + 2); // 2 because title is col 1
+      if (c) c.enabled(checkbox.checked);
+    });
+  }
+});
+
+}
+
+
+// ===== Apply new column order after dragging in menu =====
+// function applyColumnOrder(newOrder) {
+//   logicalColumnOrder = newOrder.slice();
+
+//   if (!dataGridInstance) return;
+
+//   logicalColumnOrder.forEach((checkboxId, idx) => {
+//     const physicalIndex = idx + 1;
+//     const cfg = COLUMN_CONFIG[checkboxId];
+//     if (!cfg) return;
+
+//     const col = dataGridInstance.column(physicalIndex);
+//     cfg.configure(col);
+
+//     const checkbox = document.getElementById(checkboxId);
+//     if (checkbox) {
+//       col.enabled(checkbox.checked);
+//     }
+//   });
+
+//   if (chartInstance) {
+//     chartInstance.draw();
+//   }
+// }
+function applyColumnOrder(newOrder) {
+  logicalColumnOrder = newOrder.slice(); // reorderable only
+
+  if (!dataGridInstance) return;
+
+  // 1) Re-apply fixed TITLE in col(1)
+  const titleCol = dataGridInstance.column(1);
+  const titleCfg = COLUMN_CONFIG["col-title"];
+  const titleCheckbox = document.getElementById("col-title");
+
+  if (titleCfg && titleCol) {
+    titleCfg.configure(titleCol);
+    if (titleCheckbox) {
+      titleCol.enabled(titleCheckbox.checked);
+    }
+  }
+
+  // 2) Re-apply reordered columns starting from col(2)
+  logicalColumnOrder.forEach((checkboxId, idx) => {
+    const physicalIndex = idx + 2;  // +2 because col 1 is title
+    const cfg = COLUMN_CONFIG[checkboxId];
+    if (!cfg) return;
+
+    const col = dataGridInstance.column(physicalIndex);
+    cfg.configure(col);
+
+    const checkbox = document.getElementById(checkboxId);
+    if (checkbox) {
       col.enabled(checkbox.checked);
+    }
+  });
+
+  if (chartInstance) {
+    chartInstance.draw();
+  }
+}
+
+
+// ===== Drag & drop logic in Columns menu =====
+function initColumnDrag() {
+  const menu = document.getElementById("columnsMenu");
+  if (!menu) return;
+
+  const items = menu.querySelectorAll(".col-item");
+  let draggedEl = null;
+
+  items.forEach((item) => {
+    item.addEventListener("dragstart", (e) => {
+      draggedEl = item;
+      e.dataTransfer.effectAllowed = "move";
+      item.classList.add("dragging");
+    });
+
+    item.addEventListener("dragend", () => {
+      if (draggedEl) draggedEl.classList.remove("dragging");
+      draggedEl = null;
+
+      // After drop, compute new order from DOM
+      // const newOrder = Array.from(
+      //   menu.querySelectorAll(".col-item input[type='checkbox']")
+      // ).map((cb) => cb.id); // e.g. ["col-duration", "col-title", ...]
+
+      const newOrder = Array.from(
+  menu.querySelectorAll(".col-item input[type='checkbox']")
+)
+  .map(cb => cb.id)
+  .filter(id => id !== "col-title");  // skip fixed title
+
+      applyColumnOrder(newOrder);
+    });
+
+    item.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      if (!draggedEl || draggedEl === item) return;
+
+      const bounding = item.getBoundingClientRect();
+      const offset = e.clientY - bounding.top;
+      const halfway = bounding.height / 2;
+
+      if (offset > halfway) {
+        item.parentNode.insertBefore(draggedEl, item.nextSibling);
+      } else {
+        item.parentNode.insertBefore(draggedEl, item);
+      }
     });
   });
 }
+// ===== Styling helpers =====
+function styleColumnTitle(col, text) {
+  col.title().text(text);
+  col.title().fontColor("#1e293b");
+  col.title().fontWeight(700);
+  col.title().fontSize(13);
+  col.title().padding(5, 0, 5, 10);
+  col.title().fontFamily("'Inter', Helvetica, Arial, sans-serif");
+  return col;
+}
 
+function styleColumnLabels(col) {
+  col.labels().fontColor("#334155");
+  col.labels().fontSize(12);
+  col.labels().padding(4, 0, 4, 10);
+  return col;
+}
 
 
 // ===== 7. PERT chart creation =====

@@ -451,3 +451,11 @@ select {
 .anychart-legend {
   font-family: 'Inter', Helvetica, Arial, sans-serif !important;
 }
+.columns-menu .col-item.dragging {
+  opacity: 0.6;
+  border: 1px dashed #64748b;
+}
+.columns-menu .col-item {
+  cursor: move;
+  user-select: none;
+}

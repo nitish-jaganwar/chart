@@ -35,7 +35,10 @@
             "milestone": false,
             "parentTask": "APMSIDC-GoAP",
             "parentId": 1,
-            "duration": 0,
+            "duration": {
+              "m_duration": 0,
+              "m_units": "DAYS"
+            },
             "children": [
               {
                 "id": "3",
@@ -68,39 +71,42 @@
                   {
                     "id": "task_1764603815114",
                     "name": "B1",
-                    "duration": 25,
-                    "relation": "Start-finish",
-                    "baselineStartDate": "2025-12-01",
-                    "baselineEndDate": "2025-12-25",
-                    "actualStartDate": "2025-12-01",
-                    "actualEndDate": "2025-12-30",
-                    "progressPercentage": "25%",
-                    "status": "IN_PROGRESS",
-                    "assignee": "nitish kumar",
+                    "actualStart": "2025-12-01",
+                    "actualEnd": "2025-12-30",
+                    "duration": {
+                      "m_duration": 25,
+                      "m_units": "DAYS"
+                    },
                     "children": [
                       {
                         "id": "task_1764678495286",
                         "name": "b2",
-                        "relation": "",
-                        "duration": 0,
-                        "progressPercentage": "0%",
-                        "status": "PLANNED",
-                        "assignee": "",
-                        "children": []
+                        "duration": {
+                          "m_duration": 0,
+                          "m_units": "DAYS"
+                        }
                       },
                       {
                         "id": "task_1764680243302",
                         "name": "B3",
-                        "relation": "Start-finish",
-                        "duration": 52,
-                        "baselineStartDate": "2021-06-01",
-                        "baselineEndDate": "2021-06-05",
                         "actualStart": "2021-06-01",
                         "actualEnd": "2022-07-31",
                         "progressValue": "50%",
-                        "status": "PLANNED",
-                        "assignee": "nitish",
-                        "children": []
+                        "duration": {
+                          "m_duration": 52,
+                          "m_units": "DAYS"
+                        }
+                      },
+                      {
+                        "id": "task_1764847047238",
+                        "name": "b5",
+                        "actualStart": "2025-12-04",
+                        "actualEnd": "2025-12-24",
+                        "progressValue": "50%",
+                        "duration": {
+                          "m_duration": 20,
+                          "m_units": "DAYS"
+                        }
                       }
                     ]
                   }
@@ -744,12 +750,7 @@
                   }
                 ]
               }
-            ],
-            "relation": "",
-            "baselineStartDate": null,
-            "baselineEndDate": null,
-            "status": "PLANNED",
-            "assignee": ""
+            ]
           }
         ]
       }

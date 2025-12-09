@@ -201,7 +201,7 @@
       </div>
 
       <!-- 🔽 Columns dropdown -->
-      <div class="columns-dropdown">
+      <!-- <div class="columns-dropdown">
         <button class="columns-toggle" type="button">
           <span class="material-icons">view_week</span>
           Columns
@@ -221,7 +221,47 @@
           <label><input type="checkbox" id="col-assignee" checked> Assignee</label>
         </div>
 
-      </div>
+      </div> -->
+      <div class="columns-dropdown">
+  <button class="columns-toggle" type="button">
+    <span class="material-icons">view_week</span>
+    Columns
+    <span class="material-icons">expand_more</span>
+  </button>
+
+  <div class="columns-menu" id="columnsMenu">
+    <!-- <label class="col-item" draggable="false">
+      <input type="checkbox" id="col-title" checked> Title
+    </label> -->
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-relation" checked> Relation
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-duration" checked> Duration
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-base-start" checked> Baseline Start Date
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-base-end" checked> Baseline End Date
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-start" checked> Actual Start Date
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-end" checked> Actual End Date
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-progress" checked> Progress
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-status" checked> Status
+    </label>
+    <label class="col-item" draggable="true">
+      <input type="checkbox" id="col-assignee" checked> Assignee
+    </label>
+  </div>
+</div>
 
       <!-- keep JSON / tasks / toggle as they are -->
       <button id="saveJSON" type="button">Refresh</button>
