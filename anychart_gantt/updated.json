@@ -2,57 +2,49 @@
   {
     "id": "0",
     "name": "tBits_Implementation_in_JSPL_Angul_Phase_2_Expansion_Project_Plan_Baseline",
-    "actualStart": "2021-06-01T09:30",  
-    "actualEnd": "2021-06-21T15:18",
-    "progressValue": "0.0%",
+    "actualStart": "2021-01-05",
+    "actualEnd": "2021-11-27",
+    "progressValue": "62%",
     "milestone": false,
     "parentTask": "-",
-    "duration": {
-      "m_duration": 17.6,
-      "m_units": "DAYS"
-    },
+    "duration": "325",
+    "assignee": "Prabin",
     "children": [
       {
         "id": "1",
         "name": "APMSIDC-GoAP",
-        "actualStart": "2021-06-01T09:30",
-        "actualEnd": "2021-06-21T15:18",
-        "progressValue": "50.0%",
+        "actualStart": "2021-01-05",
+        "actualEnd": "2021-11-27",
+        "progressValue": "93%",
         "milestone": false,
         "parentTask": "tBits_Implementation_in_JSPL_Angul_Phase_2_Expansion_Project_Plan_Baseline",
         "parentId": 0,
-        "duration": {
-          "m_duration": 17.6,
-          "m_units": "DAYS"
-        },
+        "duration": "325",
+        "assignee": "Nitish",
         "children": [
           {
             "id": "2",
             "name": "tBits Collabwrite Deployment",
-            "actualStart": "2021-06-01",
-            "actualEnd": "2021-06-21",
-            "progressValue": "85%",
+            "actualStart": "2021-01-05",
+            "actualEnd": "2021-11-27",
+            "progressValue": "15%",
             "milestone": false,
             "parentTask": "APMSIDC-GoAP",
             "parentId": 1,
-            "duration": {
-              "m_duration": 0,
-              "m_units": "DAYS"
-            },
+            "duration": "325",
+            "assignee": "Dinesh",
             "children": [
               {
                 "id": "3",
                 "name": "NTP + Moblisation period",
-                "actualStart": "2021-06-01T09:30",
-                "actualEnd": "2021-06-04",
-                "progressValue": "0.0%",
+                "actualStart": "2021-05-21",
+                "actualEnd": "2021-08-06",
+                "progressValue": "88%",
                 "milestone": false,
                 "parentTask": "tBits Collabwrite Deployment",
                 "parentId": 2,
-                "duration": {
-                  "m_duration": 3,
-                  "m_units": "DAYS"
-                },
+                "duration": "77",
+                "assignee": "Anish",
                 "connector": [
                   {
                     "connectTo": "4",
@@ -67,49 +59,42 @@
                     "connectorType": "finish-start"
                   }
                 ]
-                
               },
               {
                 "id": "4",
                 "name": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
-                "actualStart": "2021-06-04T09:30",
-                "actualEnd": "2021-06-21T15:18",
-                "progressValue": "0.0%",
+                "actualStart": "2021-01-05",
+                "actualEnd": "2021-11-27",
+                "progressValue": "44%",
                 "milestone": false,
                 "parentTask": "tBits Collabwrite Deployment",
                 "parentId": 2,
-                "duration": {
-                  "m_duration": 14.6,
-                  "m_units": "DAYS"
-                },
+                "duration": "325",
+                "assignee": "Anish",
                 "children": [
                   {
                     "id": "5",
                     "name": "Installation",
-                    "actualStart": "2021-06-04T09:30",
-                    "actualEnd": "2021-06-11T09:30",
-                    "progressValue": "0.0%",
+                    "actualStart": "2021-02-13",
+                    "actualEnd": "2021-11-27",
+                    "progressValue": "9%",
                     "milestone": false,
                     "parentTask": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
                     "parentId": 4,
-                    "duration": {
-                      "m_duration": 6,
-                      "m_units": "DAYS"
-                    },
+                    "duration": "286",
+                    "assignee": "Ritesh",
                     "children": [
                       {
                         "id": "6",
                         "name": "Installation of tBits [ 2 instances] + 1 DR Instance",
-                        "actualStart": "2021-06-04T09:30",
-                        "actualEnd": "2021-06-05T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-16",
+                        "actualEnd": "2021-11-20",
+                        "progressValue": "18%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "96",
+                        "assignee": "Ritesh",
                         "connector": [
                           {
                             "connectTo": "7",
@@ -120,16 +105,14 @@
                       {
                         "id": "7",
                         "name": "Integration with LDAP Server & Central Authentication Service",
-                        "actualStart": "2021-06-05T09:30",
-                        "actualEnd": "2021-06-07T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-02-13",
+                        "actualEnd": "2021-05-15",
+                        "progressValue": "91%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "91",
+                        "assignee": "Ritesh",
                         "connector": [
                           {
                             "connectTo": "8",
@@ -140,16 +123,14 @@
                       {
                         "id": "8",
                         "name": "Integration with email server - incoming & outgoing emails",
-                        "actualStart": "2021-06-07T09:30",
-                        "actualEnd": "2021-06-08T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-25",
+                        "actualEnd": "2021-11-27",
+                        "progressValue": "54%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "94",
+                        "assignee": "Dinesh",
                         "connector": [
                           {
                             "connectTo": "9",
@@ -160,16 +141,14 @@
                       {
                         "id": "9",
                         "name": "Load Balancer Configuration - HA Proxy, KeepAlived, Floating IP",
-                        "actualStart": "2021-06-08T09:30",
-                        "actualEnd": "2021-06-09T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-06-25",
+                        "actualEnd": "2021-08-01",
+                        "progressValue": "53%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "37",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "10",
@@ -180,30 +159,26 @@
                       {
                         "id": "10",
                         "name": "DR Server Setup - including MySQL DB Replication + rSync Files",
-                        "actualStart": "2021-06-09T09:30",
-                        "actualEnd": "2021-06-10T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-04-11",
+                        "actualEnd": "2021-06-19",
+                        "progressValue": "48%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        }
+                        "duration": "69",
+                        "assignee": "Dinesh"
                       },
                       {
                         "id": "11",
                         "name": "Documentation - Production Support Manual",
-                        "actualStart": "2021-06-04T09:30",
-                        "actualEnd": "2021-06-10T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-06-21",
+                        "actualEnd": "2021-09-08",
+                        "progressValue": "53%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 5,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "79",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "12",
@@ -214,32 +189,28 @@
                       {
                         "id": "12",
                         "name": "Support Process Set-up for Client Users [another BA in the same tBits installation]",
-                        "actualStart": "2021-06-10T09:30",
-                        "actualEnd": "2021-06-11T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-02-14",
+                        "actualEnd": "2021-04-14",
+                        "progressValue": "66%",
                         "milestone": false,
                         "parentTask": "Installation",
                         "parentId": 5,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        }
+                        "duration": "59",
+                        "assignee": "Dinesh"
                       }
                     ]
                   },
                   {
                     "id": "13",
                     "name": "Customization : tBits for First Project as per client coordination & control process",
-                    "actualStart": "2021-06-04T09:30",
-                    "actualEnd": "2021-06-19T10:18",
-                    "progressValue": "0.0%",
+                    "actualStart": "2021-01-05",
+                    "actualEnd": "2021-10-31",
+                    "progressValue": "94%",
                     "milestone": false,
                     "parentTask": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
                     "parentId": 4,
-                    "duration": {
-                      "m_duration": 13.1,
-                      "m_units": "DAYS"
-                    },
+                    "duration": "299",
+                    "assignee": "Prabin",
                     "connector": [
                       {
                         "connectTo": "37",
@@ -250,30 +221,26 @@
                       {
                         "id": "14",
                         "name": "First Project Customization",
-                        "actualStart": "2021-06-04T09:30",
-                        "actualEnd": "2021-06-12T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-01-05",
+                        "actualEnd": "2021-09-29",
+                        "progressValue": "45%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 7,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "267",
+                        "assignee": "Anish",
                         "children": [
                           {
                             "id": "15",
                             "name": "Configuration of the Business Areas",
-                            "actualStart": "2021-06-04T09:30",
-                            "actualEnd": "2021-06-09T09:30",
-                            "progressValue": "0.0%",
+                            "actualStart": "2021-01-05",
+                            "actualEnd": "2021-04-10",
+                            "progressValue": "39%",
                             "milestone": false,
                             "parentTask": "First Project Customization",
                             "parentId": 14,
-                            "duration": {
-                              "m_duration": 4,
-                              "m_units": "DAYS"
-                            },
+                            "duration": "95",
+                            "assignee": "Dinesh",
                             "connector": [
                               {
                                 "connectTo": "16",
@@ -284,16 +251,14 @@
                           {
                             "id": "16",
                             "name": "Business Area Rules & Workflows",
-                            "actualStart": "2021-06-09T09:30",
-                            "actualEnd": "2021-06-10T09:30",
-                            "progressValue": "0.0%",
+                            "actualStart": "2021-06-19",
+                            "actualEnd": "2021-09-29",
+                            "progressValue": "90%",
                             "milestone": false,
                             "parentTask": "First Project Customization",
                             "parentId": 14,
-                            "duration": {
-                              "m_duration": 1,
-                              "m_units": "DAYS"
-                            },
+                            "duration": "102",
+                            "assignee": "Anish",
                             "connector": [
                               {
                                 "connectTo": "17",
@@ -304,16 +269,14 @@
                           {
                             "id": "17",
                             "name": "Permissions / RBAC",
-                            "actualStart": "2021-06-10T09:30",
-                            "actualEnd": "2021-06-11T09:30",
-                            "progressValue": "0.0%",
+                            "actualStart": "2021-07-31",
+                            "actualEnd": "2021-09-03",
+                            "progressValue": "43%",
                             "milestone": false,
                             "parentTask": "First Project Customization",
                             "parentId": 14,
-                            "duration": {
-                              "m_duration": 1,
-                              "m_units": "DAYS"
-                            },
+                            "duration": "34",
+                            "assignee": "Prabin",
                             "connector": [
                               {
                                 "connectTo": "18",
@@ -324,16 +287,14 @@
                           {
                             "id": "18",
                             "name": "Testing by the tBits team",
-                            "actualStart": "2021-06-11T09:30",
-                            "actualEnd": "2021-06-12T09:30",
-                            "progressValue": "0.0%",
+                            "actualStart": "2021-05-14",
+                            "actualEnd": "2021-06-25",
+                            "progressValue": "68%",
                             "milestone": false,
                             "parentTask": "First Project Customization",
                             "parentId": 14,
-                            "duration": {
-                              "m_duration": 1,
-                              "m_units": "DAYS"
-                            },
+                            "duration": "42",
+                            "assignee": "Anish",
                             "connector": [
                               {
                                 "connectTo": "19",
@@ -346,16 +307,14 @@
                       {
                         "id": "19",
                         "name": "UAT-1 with the client team",
-                        "actualStart": "2021-06-12T09:30",
-                        "actualEnd": "2021-06-14T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-07-28",
+                        "actualEnd": "2021-09-06",
+                        "progressValue": "52%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "40",
+                        "assignee": "Dinesh",
                         "connector": [
                           {
                             "connectTo": "20",
@@ -366,16 +325,14 @@
                       {
                         "id": "20",
                         "name": "Incorporation of the comments",
-                        "actualStart": "2021-06-14T09:30",
-                        "actualEnd": "2021-06-15T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-02-09",
+                        "actualEnd": "2021-03-23",
+                        "progressValue": "58%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "42",
+                        "assignee": "Anish",
                         "connector": [
                           {
                             "connectTo": "21",
@@ -386,16 +343,14 @@
                       {
                         "id": "21",
                         "name": "UAT-2 with the client team",
-                        "actualStart": "2021-06-15T09:30",
-                        "actualEnd": "2021-06-16T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-20",
+                        "actualEnd": "2021-10-31",
+                        "progressValue": "44%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "72",
+                        "assignee": "Anish",
                         "connector": [
                           {
                             "connectTo": "22",
@@ -406,16 +361,14 @@
                       {
                         "id": "22",
                         "name": "Incorporation of the comments",
-                        "actualStart": "2021-06-16T09:30",
-                        "actualEnd": "2021-06-17T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-02-19",
+                        "actualEnd": "2021-03-24",
+                        "progressValue": "24%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "33",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "23",
@@ -426,16 +379,14 @@
                       {
                         "id": "23",
                         "name": "Documentation & Reports",
-                        "actualStart": "2021-06-17T09:30",
-                        "actualEnd": "2021-06-19T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-05-18",
+                        "actualEnd": "2021-08-31",
+                        "progressValue": "30%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 2,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "105",
+                        "assignee": "Prabin",
                         "connector": [
                           {
                             "connectTo": "24",
@@ -446,16 +397,14 @@
                       {
                         "id": "24",
                         "name": "Readiness for GoLive",
-                        "actualStart": "2021-06-19T09:30",
-                        "actualEnd": "2021-06-19T10:18",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-16",
+                        "actualEnd": "2021-10-23",
+                        "progressValue": "35%",
                         "milestone": false,
                         "parentTask": "Customization : tBits for First Project as per client coordination & control process",
                         "parentId": 13,
-                        "duration": {
-                          "m_duration": 0.1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "68",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "34",
@@ -468,16 +417,14 @@
                   {
                     "id": "25",
                     "name": "Import of Historical Data",
-                    "actualStart": "2021-06-04T09:30",
-                    "actualEnd": "2021-06-12T09:30",
-                    "progressValue": "0.0%",
+                    "actualStart": "2021-02-12",
+                    "actualEnd": "2021-11-20",
+                    "progressValue": "54%",
                     "milestone": false,
                     "parentTask": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
                     "parentId": 4,
-                    "duration": {
-                      "m_duration": 7,
-                      "m_units": "DAYS"
-                    },
+                    "duration": "281",
+                    "assignee": "Anish",
                     "connector": [
                       {
                         "connectTo": "37",
@@ -488,16 +435,14 @@
                       {
                         "id": "26",
                         "name": "Specifications of Program to be created for the import of data",
-                        "actualStart": "2021-06-04T09:30",
-                        "actualEnd": "2021-06-05T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-04-18",
+                        "actualEnd": "2021-06-21",
+                        "progressValue": "86%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "64",
+                        "assignee": "Prabin",
                         "connector": [
                           {
                             "connectTo": "27",
@@ -508,16 +453,14 @@
                       {
                         "id": "27",
                         "name": "Sample Data Import",
-                        "actualStart": "2021-06-05T09:30",
-                        "actualEnd": "2021-06-07T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-02-12",
+                        "actualEnd": "2021-04-15",
+                        "progressValue": "7%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "62",
+                        "assignee": "Anish",
                         "connector": [
                           {
                             "connectTo": "28",
@@ -528,16 +471,14 @@
                       {
                         "id": "28",
                         "name": "Sample Data Verification",
-                        "actualStart": "2021-06-07T09:30",
-                        "actualEnd": "2021-06-08T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-03-05",
+                        "actualEnd": "2021-04-09",
+                        "progressValue": "63%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "35",
+                        "assignee": "Ritesh",
                         "connector": [
                           {
                             "connectTo": "29",
@@ -548,16 +489,14 @@
                       {
                         "id": "29",
                         "name": "Production Run  - import of data",
-                        "actualStart": "2021-06-08T09:30",
-                        "actualEnd": "2021-06-09T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-01",
+                        "actualEnd": "2021-11-09",
+                        "progressValue": "18%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "100",
+                        "assignee": "Prabin",
                         "connector": [
                           {
                             "connectTo": "30",
@@ -568,16 +507,14 @@
                       {
                         "id": "30",
                         "name": "Verification by the client team",
-                        "actualStart": "2021-06-09T09:30",
-                        "actualEnd": "2021-06-10T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-04-19",
+                        "actualEnd": "2021-07-27",
+                        "progressValue": "16%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "99",
+                        "assignee": "Dinesh",
                         "connector": [
                           {
                             "connectTo": "31",
@@ -588,16 +525,14 @@
                       {
                         "id": "31",
                         "name": "Data transfer to the Production server",
-                        "actualStart": "2021-06-10T09:30",
-                        "actualEnd": "2021-06-11T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-07-29",
+                        "actualEnd": "2021-11-20",
+                        "progressValue": "78%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "114",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "32",
@@ -608,46 +543,40 @@
                       {
                         "id": "32",
                         "name": "Readiness for GoLive",
-                        "actualStart": "2021-06-11T09:30",
-                        "actualEnd": "2021-06-12T09:30",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-08-01",
+                        "actualEnd": "2021-09-02",
+                        "progressValue": "21%",
                         "milestone": false,
                         "parentTask": "Import of Historical Data",
                         "parentId": 25,
-                        "duration": {
-                          "m_duration": 1,
-                          "m_units": "DAYS"
-                        }
+                        "duration": "32",
+                        "assignee": "Nitish"
                       }
                     ]
                   },
                   {
                     "id": "33",
                     "name": "End User Training",
-                    "actualStart": "2021-06-19T10:18",
-                    "actualEnd": "2021-06-21T15:18",
-                    "progressValue": "0.0%",
+                    "actualStart": "2021-01-20",
+                    "actualEnd": "2021-09-08",
+                    "progressValue": "39%",
                     "milestone": false,
                     "parentTask": "Technical - Setup, Administration, Sustainance of tBits CollabWrite",
                     "parentId": 4,
-                    "duration": {
-                      "m_duration": 1.5,
-                      "m_units": "DAYS"
-                    },
+                    "duration": "231",
+                    "assignee": "Ritesh",
                     "children": [
                       {
                         "id": "34",
                         "name": "Training Session-1 PMO",
-                        "actualStart": "2021-06-19T10:18",
-                        "actualEnd": "2021-06-19T15:18",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-01-20",
+                        "actualEnd": "2021-04-03",
+                        "progressValue": "86%",
                         "milestone": false,
                         "parentTask": "End User Training",
                         "parentId": 33,
-                        "duration": {
-                          "m_duration": 0.5,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "73",
+                        "assignee": "Anish",
                         "connector": [
                           {
                             "connectTo": "35",
@@ -658,16 +587,14 @@
                       {
                         "id": "35",
                         "name": "Training Session-2 Owners' Engineer",
-                        "actualStart": "2021-06-19T15:18",
-                        "actualEnd": "2021-06-21T10:18",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-05-24",
+                        "actualEnd": "2021-09-08",
+                        "progressValue": "42%",
                         "milestone": false,
                         "parentTask": "End User Training",
                         "parentId": 33,
-                        "duration": {
-                          "m_duration": 0.5,
-                          "m_units": "DAYS"
-                        },
+                        "duration": "107",
+                        "assignee": "Nitish",
                         "connector": [
                           {
                             "connectTo": "36",
@@ -678,30 +605,26 @@
                       {
                         "id": "36",
                         "name": "Training Session-3 Existing Projects",
-                        "actualStart": "2021-06-21T10:18",
-                        "actualEnd": "2021-06-21T15:18",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-07-27",
+                        "actualEnd": "2021-08-30",
+                        "progressValue": "44%",
                         "milestone": false,
                         "parentTask": "End User Training",
                         "parentId": 33,
-                        "duration": {
-                          "m_duration": 0.5,
-                          "m_units": "DAYS"
-                        }
+                        "duration": "34",
+                        "assignee": "Dinesh"
                       },
                       {
                         "id": "37",
                         "name": "GoLive Declaration",
-                        "actualStart": "2021-06-19T10:18",
-                        "actualEnd": "2021-06-19T10:18",
-                        "progressValue": "0.0%",
+                        "actualStart": "2021-06-12",
+                        "actualEnd": "2021-09-02",
+                        "progressValue": "57%",
                         "milestone": true,
                         "parentTask": "End User Training",
                         "parentId": 33,
-                        "duration": {
-                          "m_duration": 0,
-                          "m_units": "DAYS"
-                        }
+                        "duration": "82",
+                        "assignee": "Prabin"
                       }
                     ]
                   }

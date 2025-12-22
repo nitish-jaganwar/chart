@@ -102,38 +102,38 @@ const COLUMN_CONFIG = {
     }
   },
 
-  // "col-duration": {
-  //   title: "Duration",
-  //   configure: (col) => {
-  //     styleColumnTitle(col, "Duration");
-  //     styleColumnLabels(col);
-  //     col.width(90);
-  //     col.labels().format("{%duration}");
-  //   }
-  // },
   "col-duration": {
-  title: "Duration",
-  configure: (col) => {
-    styleColumnTitle(col, "Duration");
-    styleColumnLabels(col);
-    col.width(90);
+    title: "Duration",
+    configure: (col) => {
+      styleColumnTitle(col, "Duration");
+      styleColumnLabels(col);
+      col.width(90);
+      col.labels().format("{%duration} days");
+    }
+  },
+//   "col-duration": {
+//   title: "Duration",
+//   configure: (col) => {
+//     styleColumnTitle(col, "Duration");
+//     styleColumnLabels(col);
+//     col.width(90);
 
-    col.labels().format(function () {
-      const duration = this.item.get("duration");
+//     col.labels().format(function () {
+//       const duration = this.item.get("duration");
 
-      if (!duration || typeof duration !== "object") {
-        return "";
-      }
+//       if (!duration || typeof duration !== "object") {
+//         return "";
+//       }
 
-      const value = duration.m_duration;
-      const unit  = duration.m_units;
+//       const value = duration.m_duration;
+//       const unit  = duration.m_units;
 
-      if (value == null || !unit) return "";
+//       if (value == null || !unit) return "";
 
-      return `${value} ${unit.toLowerCase()}`; // → "3 days"
-    });
-  }
-},
+//       return `${value} ${unit.toLowerCase()}`; // → "3 days"
+//     });
+//   }
+// },
 
 
   "col-base-start": {
@@ -880,15 +880,20 @@ async function createGanttChart() {
   chart.defaultRowHeight(35);
   chart.headerHeight(105);
   chart.getTimeline().elements().height(10);
-  chart.getTimeline().scale().maximumGap(1);
-  //chart.fitAll();
+  chart.getTimeline().scale().maximumGap(2);
+  chart.fitAll();
   chart.getTimeline().scale().fiscalYearStartMonth(1);
-
+ // set the maximum value of the scale
+    chart.getTimeline().scale().maximum("2021-12-31");
   chart.getTimeline().scale().zoomLevels([
-  ["day", "week"],
   ["week", "month"],
   ["month", "quarter"]
 ]);
+chart.zoomTo(
+  new Date("2021-01-01"),
+  new Date("2021-07-31")
+);
+
 
 
 
@@ -1215,10 +1220,27 @@ async function createPertChart() {
 
     pertData.push({ id, name, duration });
 
-    const connectTo = node.get("connectTo");
-    if (connectTo) {
-      dependencies.push({ from: connectTo, to: id });
+    // const connectTo = node.get("connectTo");
+    // if (connectTo) {
+    //   dependencies.push({ from: connectTo, to: id });
+    // }
+    // --- FIX STARTS HERE ---
+    // 1. Access the 'connector' array from the JSON (not 'connectTo')
+    const connectors = node.get("connector");
+
+    // 2. Iterate through the array if it exists
+    if (connectors && Array.isArray(connectors)) {
+      connectors.forEach((conn) => {
+        // 3. Get the target ID
+        const targetId = conn.connectTo;
+        
+        if (targetId) {
+          // 4. Push dependency: Current Node (id) -> Target Node (targetId)
+          dependencies.push({ from: id, to: targetId });
+        }
+      });
     }
+    // --- FIX ENDS HERE ---
 
     const children = node.getChildren();
     for (let i = 0; i < children.length; i++) traverse(children[i]);
