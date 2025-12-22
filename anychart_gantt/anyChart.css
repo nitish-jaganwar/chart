@@ -459,3 +459,30 @@ select {
   cursor: move;
   user-select: none;
 }
+/* Simple toast styles */
+.nc-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  background: #334155; /* default info color */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+
+.nc-toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nc-toast-success { background: #16a34a; }
+.nc-toast-warning { background: #ea580c; }
+.nc-toast-error   { background: #dc2626; }
+.nc-toast-info    { background: #0f766e; }

@@ -2,7 +2,7 @@
   {
     "id": "0",
     "name": "tBits_Implementation_in_JSPL_Angul_Phase_2_Expansion_Project_Plan_Baseline",
-    "actualStart": "2021-06-01T09:30",
+    "actualStart": "2021-06-01T09:30",  
     "actualEnd": "2021-06-21T15:18",
     "progressValue": "0.0%",
     "milestone": false,
@@ -17,7 +17,7 @@
         "name": "APMSIDC-GoAP",
         "actualStart": "2021-06-01T09:30",
         "actualEnd": "2021-06-21T15:18",
-        "progressValue": "0.0%",
+        "progressValue": "50.0%",
         "milestone": false,
         "parentTask": "tBits_Implementation_in_JSPL_Angul_Phase_2_Expansion_Project_Plan_Baseline",
         "parentId": 0,
@@ -66,51 +66,8 @@
                     "connectTo": "26",
                     "connectorType": "finish-start"
                   }
-                ],
-                "children": [
-                  {
-                    "id": "task_1764603815114",
-                    "name": "B1",
-                    "actualStart": "2025-12-01",
-                    "actualEnd": "2025-12-30",
-                    "duration": {
-                      "m_duration": 25,
-                      "m_units": "DAYS"
-                    },
-                    "children": [
-                      {
-                        "id": "task_1764678495286",
-                        "name": "b2",
-                        "duration": {
-                          "m_duration": 0,
-                          "m_units": "DAYS"
-                        }
-                      },
-                      {
-                        "id": "task_1764680243302",
-                        "name": "B3",
-                        "actualStart": "2021-06-01",
-                        "actualEnd": "2022-07-31",
-                        "progressValue": "50%",
-                        "duration": {
-                          "m_duration": 52,
-                          "m_units": "DAYS"
-                        }
-                      },
-                      {
-                        "id": "task_1764847047238",
-                        "name": "b5",
-                        "actualStart": "2025-12-04",
-                        "actualEnd": "2025-12-24",
-                        "progressValue": "50%",
-                        "duration": {
-                          "m_duration": 20,
-                          "m_units": "DAYS"
-                        }
-                      }
-                    ]
-                  }
                 ]
+                
               },
               {
                 "id": "4",
